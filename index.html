@@ -25,7 +25,9 @@
             overflow: hidden;
         }
 
-        .container {
+        /* Login screen styles */
+        .login-page {
+            display: block;
             text-align: center;
             background-color: rgba(0, 0, 0, 0.7);
             padding: 50px;
@@ -35,7 +37,7 @@
             width: 100%;
         }
 
-        h1 {
+        .login-page h1 {
             font-size: 2em;
             margin-bottom: 20px;
         }
@@ -77,6 +79,7 @@
             margin-top: 10px;
         }
 
+        /* GitHub Button Styles */
         .github-btn {
             position: fixed;
             bottom: 20px;
@@ -107,8 +110,17 @@
             }
         }
 
-        .home-page .github-btn {
-            display: block;
+        /* Home page styles */
+        .home-page {
+            display: none; /* Start hidden */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
         .home-page .container {
@@ -133,23 +145,23 @@
 
     </style>
 </head>
-<body class="login-page">
+<body>
 
     <!-- Login Screen -->
-    <div class="container">
+    <div class="login-page">
         <h1>Login</h1>
         <input type="password" id="password" class="input-field" placeholder="Enter Password" />
         <button class="button" onclick="login()">Login</button>
         <p id="error-message" class="error"></p>
     </div>
 
-    <!-- GitHub Button (hidden initially) -->
+    <!-- GitHub Button -->
     <a id="github-btn" href="https://github.com/elhouso/home" class="github-btn" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
     </a>
 
-    <!-- Home Page (hidden initially) -->
-    <div class="home-page" style="display:none;">
+    <!-- Home Page Content -->
+    <div class="home-page">
         <div class="container">
             <h1>Subscriptions</h1>
             <p>Welcome to the subscription page! Here's where the content goes.</p>
@@ -166,11 +178,11 @@
 
             if (password === "1234") {
                 // Hide the login page and show the home page
-                loginPage.style.display = "none"; // Hide login page
-                homePage.style.display = "flex"; // Show home page
+                loginPage.style.display = "none"; // Hide the login page
+                homePage.style.display = "flex"; // Show the home page
                 errorMessage.style.display = "none";
                 setTimeout(() => {
-                    githubBtn.style.display = 'block';
+                    githubBtn.style.display = 'block'; // Show GitHub button after a delay
                 }, 500);
             } else {
                 errorMessage.textContent = "Access Denied";
@@ -180,5 +192,6 @@
             }
         }
     </script>
+
 </body>
 </html>
