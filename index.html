@@ -23,6 +23,7 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            transition: all 0.3s ease;
         }
 
         .container {
@@ -107,15 +108,25 @@
             }
         }
 
-        .home-page .github-btn {
-            display: block;
+        .home-page {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
         .home-page .container {
             max-width: 800px;
             width: 90%;
             padding: 100px;
-            text-align: center;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
 
         .home-page .container h1 {
@@ -158,10 +169,13 @@
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
             const githubBtn = document.getElementById('github-btn');
+            const homePage = document.querySelector('.home-page');
+            const loginPage = document.querySelector('.login-page');
 
             if (password === "1234") {
-                document.body.classList.remove("login-page");
-                document.body.classList.add("home-page");
+                // Hide the login page and show the home page
+                loginPage.style.display = "none";
+                homePage.style.display = "flex";
                 errorMessage.style.display = "none";
                 setTimeout(() => {
                     githubBtn.style.display = 'block';
