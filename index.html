@@ -79,8 +79,8 @@
             margin-top: 10px;
         }
 
-        /* GitHub Button Styles */
-        .github-btn {
+        /* GitHub and additional button Styles */
+        .github-btn, .uptime-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
@@ -93,7 +93,7 @@
             animation: bounce 1s infinite alternate;
         }
 
-        .github-btn img {
+        .github-btn img, .uptime-btn img {
             width: 30px;
             height: 30px;
         }
@@ -155,6 +155,11 @@
         <p id="error-message" class="error"></p>
     </div>
 
+    <!-- Uptime Button -->
+    <a id="uptime-btn" href="https://stats.uptimerobot.com/L6IsEPOM07" class="uptime-btn" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Clock_icon_1.png" alt="Uptime">
+    </a>
+
     <!-- GitHub Button -->
     <a id="github-btn" href="https://github.com/elhouso/home" class="github-btn" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
@@ -164,7 +169,7 @@
     <div class="home-page">
         <div class="container">
             <h1>Subscriptions</h1>
-            <p>No subscriptions currently.</p>
+            <p>Welcome to the subscription page! Here's where the content goes.</p>
         </div>
     </div>
 
@@ -173,6 +178,7 @@
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
             const githubBtn = document.getElementById('github-btn');
+            const uptimeBtn = document.getElementById('uptime-btn');
             const homePage = document.querySelector('.home-page');
             const loginPage = document.querySelector('.login-page');
 
@@ -182,7 +188,8 @@
                 homePage.style.display = "flex"; // Show the home page
                 errorMessage.style.display = "none";
                 setTimeout(() => {
-                    githubBtn.style.display = 'block'; // Show GitHub button after a delay
+                    githubBtn.style.display = 'block'; // Show GitHub button
+                    uptimeBtn.style.display = 'block'; // Show Uptime button
                 }, 500);
             } else {
                 errorMessage.textContent = "Access Denied";
