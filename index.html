@@ -34,7 +34,8 @@
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
             max-width: 500px;
-            width: 100%;
+            width: 90%; /* Change to ensure it's responsive */
+            margin: auto;
         }
 
         .login-page h1 {
@@ -94,6 +95,8 @@
             align-items: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
             display: none; /* Hidden by default */
+            max-width: 90%; /* Ensures it's responsive */
+            width: auto;
         }
 
         .footer a {
@@ -138,6 +141,80 @@
             font-size: 1.2em;
             margin-top: 10px;
             color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Responsive design */
+        @media screen and (max-width: 768px) {
+            .login-page h1 {
+                font-size: 1.5em;
+            }
+
+            .input-field {
+                padding: 12px;
+            }
+
+            .button {
+                font-size: 1.1em;
+                padding: 12px;
+            }
+
+            .footer {
+                bottom: 10px;
+                max-width: 95%; /* Reduce max-width on small screens */
+                padding: 10px;
+            }
+
+            .footer a {
+                font-size: 1em;
+            }
+
+            .home-page .container {
+                padding: 50px;
+            }
+
+            .home-page .container h1 {
+                font-size: 2.5em;
+            }
+
+            .home-page .container p {
+                font-size: 1em;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .login-page h1 {
+                font-size: 1.2em;
+            }
+
+            .input-field {
+                padding: 10px;
+            }
+
+            .button {
+                font-size: 1em;
+                padding: 10px;
+            }
+
+            .footer {
+                bottom: 5px;
+                padding: 8px;
+            }
+
+            .footer a {
+                font-size: 0.9em;
+            }
+
+            .home-page .container {
+                padding: 30px;
+            }
+
+            .home-page .container h1 {
+                font-size: 2em;
+            }
+
+            .home-page .container p {
+                font-size: 0.9em;
+            }
         }
 
     </style>
