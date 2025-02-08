@@ -13,9 +13,8 @@
             font-family: Arial, sans-serif;
         }
         body {
-            background: linear-gradient(0deg, #000000, #ffffff);
-            background-size: 400% 400%;
-            animation: gradientRotate 15s infinite linear;
+            background: url('https://cdn.discordapp.com/attachments/1300396455705575474/1337916049127112714/bailey-zindel-NRQV-hBF10M-unsplash.jpg?ex=67a92eeb&is=67a7dd6b&hm=7eaf678d2d450cec3982b0b04ac03bbffee0e12c40f425267be836d4484f401f&') no-repeat center center fixed;
+            background-size: cover;
             color: white;
             display: flex;
             align-items: center;
@@ -23,17 +22,12 @@
             height: 100vh;
             overflow: hidden;
         }
-        @keyframes gradientRotate {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
         #authScreen {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: #000;
+            background: rgba(0, 0, 0, 0.7); /* Added transparency to make the background visible */
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
