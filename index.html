@@ -79,18 +79,6 @@
             margin-top: 10px;
         }
 
-        /* Fade-in animation */
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         /* Footer Styles */
         .footer {
             position: fixed;
@@ -106,8 +94,6 @@
             align-items: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
             display: none; /* Hidden by default */
-            animation: fadeIn 1s ease-in-out forwards; /* Add fade-in effect */
-            width: auto;
         }
 
         .footer a {
@@ -132,7 +118,6 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            animation: fadeIn 1s ease-in-out forwards; /* Add fade-in effect */
         }
 
         .home-page .container {
@@ -190,7 +175,7 @@
             const footer = document.getElementById('footer');
 
             if (password === "1234") {
-                // Hide the login page and show the home page with animation
+                // Hide the login page and show the home page
                 loginPage.style.display = "none"; // Hide the login page
                 homePage.style.display = "flex"; // Show the home page
                 errorMessage.style.display = "none";
