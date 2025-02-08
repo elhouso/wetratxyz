@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Istio - Connect, secure, control, and observe services.">
+    <title>Istio</title>
+    <link rel="icon" href="https://istio.io/img/istio-logo.svg" type="image/svg+xml">
+    <style>
+        /* Reset Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1E3A8A;
+            padding: 20px 40px;
+            color: white;
+        }
+
+        header .logo img {
+            height: 40px;
+        }
+
+        header nav ul {
+            display: flex;
+            list-style-type: none;
+        }
+
+        header nav ul li {
+            margin-left: 30px;
+        }
+
+        header nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        header .cta-btn {
+            background-color: #FBBF24;
+            color: #1E3A8A;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        header .cta-btn:hover {
+            background-color: #FDBA12;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: url('https://istio.io/img/istio-logo.svg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .hero .cta-btn {
+            background-color: #FBBF24;
+            color: #1E3A8A;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        /* Main Content Section */
+        .content-section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .content-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #1E3A8A;
+        }
+
+        .content-section .cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 280px;
+            margin: 10px;
+            padding: 30px;
+            text-align: left;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            color: #1E3A8A;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .card .cta-btn {
+            margin-top: 15px;
+            background-color: #FBBF24;
+            color: #1E3A8A;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .card .cta-btn:hover {
+            background-color: #FDBA12;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1E3A8A;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+
+        footer a {
+            color: #FBBF24;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="https://istio.io/img/istio-logo.svg" alt="Istio Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#docs">Docs</a></li>
+                <li><a href="#start">Get Started</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="#blog">Blog</a></li>
+            </ul>
+        </nav>
+        <a class="cta-btn" href="#start">Get Started</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Connect, Secure, Control, and Observe Services</h1>
+        <p>Istio provides a way to connect, manage, and secure microservices across your entire infrastructure.</p>
+        <a class="cta-btn" href="#start">Get Started</a>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content-section">
+        <h2>Features</h2>
+        <div class="cards">
+            <div class="card">
+                <h3>Secure Communication</h3>
+                <p>Automatically encrypts traffic between services to prevent unauthorized access.</p>
+                <a class="cta-btn" href="#docs">Learn More</a>
+            </div>
+            <div class="card">
+                <h3>Observability</h3>
+                <p>Gain insights into the performance and behavior of your services in real-time.</p>
+                <a class="cta-btn" href="#docs">Learn More</a>
+            </div>
+            <div class="card">
+                <h3>Traffic Management</h3>
+                <p>Control traffic flows between services to ensure resilience and scalability.</p>
+                <a class="cta-btn" href="#docs">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Istio. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+
+</body>
+</html>
