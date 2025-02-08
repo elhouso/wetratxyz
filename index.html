@@ -81,7 +81,7 @@
             bottom: 20px;
             right: 20px;
             padding: 10px 15px;
-            background-color: #325ffe;
+            background-color: white;
             border-radius: 50%;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             cursor: pointer;
@@ -109,6 +109,24 @@
         .home-page .github-btn {
             display: block;
         }
+
+        .home-page .container {
+            max-width: 600px;
+            padding: 80px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .home-page .container h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .home-page .container p {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: rgba(255, 255, 255, 0.7);
+        }
     </style>
 </head>
 <body class="login-page">
@@ -123,6 +141,13 @@
     <a id="github-btn" href="https://github.com/elhouso/home" class="github-btn" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
     </a>
+
+    <div class="home-page">
+        <div class="container">
+            <h1>Subscriptions</h1>
+            <p>nullTextHere</p>
+        </div>
+    </div>
 
     <script>
         function login() {
