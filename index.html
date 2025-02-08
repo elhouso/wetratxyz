@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protected Page</title>
+    <title>Subscriptions</title>
     <style>
         * {
             margin: 0;
@@ -12,7 +12,7 @@
             font-family: Arial, sans-serif;
         }
         body {
-            background: linear-gradient(to bottom, #000000, #1a1a1a);
+            background: linear-gradient(to bottom, #000000, #0d0d0d);
             color: white;
             display: flex;
             align-items: center;
@@ -24,10 +24,10 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
             transition: opacity 0.5s ease-in-out;
         }
         input {
@@ -40,13 +40,13 @@
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            background: #444;
+            background: #333;
             color: white;
             cursor: pointer;
             transition: background 0.3s ease;
         }
         button:hover {
-            background: #666;
+            background: #555;
         }
         #content {
             display: none;
@@ -67,7 +67,7 @@
     </div>
 
     <div id="content">
-        <h1>Lorem Ipsum</h1>
+        <h1>Subscriptions</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet...</p>
         <p>More text here...</p>
     </div>
@@ -85,7 +85,7 @@
                     }, 100);
                 }, 500);
             } else {
-                alert("Wrong password!");
+                alert("Access Denied! Please try again later.");
             }
         }
     </script>
