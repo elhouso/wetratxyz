@@ -80,17 +80,25 @@
         }
 
         /* GitHub and additional button Styles */
-        .github-btn, .uptime-btn {
+        .button-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            padding: 10px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .github-btn, .uptime-btn {
+            width: 50px;
+            height: 50px;
             background-color: #ffffff;
             border-radius: 50%;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             cursor: pointer;
-            display: none;
             animation: bounce 1s infinite alternate;
+            display: none; /* Initially hidden */
         }
 
         .github-btn img, .uptime-btn img {
@@ -155,15 +163,18 @@
         <p id="error-message" class="error"></p>
     </div>
 
-    <!-- Uptime Button -->
-    <a id="uptime-btn" href="https://stats.uptimerobot.com/L6IsEPOM07" class="uptime-btn" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Clock_icon_1.png" alt="Uptime">
-    </a>
+    <!-- Button Container -->
+    <div id="button-container" class="button-container">
+        <!-- Uptime Button -->
+        <a id="uptime-btn" href="https://stats.uptimerobot.com/L6IsEPOM07" class="uptime-btn" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Clock_icon_1.png" alt="Uptime">
+        </a>
 
-    <!-- GitHub Button -->
-    <a id="github-btn" href="https://github.com/elhouso/home" class="github-btn" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
-    </a>
+        <!-- GitHub Button -->
+        <a id="github-btn" href="https://github.com/elhouso/home" class="github-btn" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
+        </a>
+    </div>
 
     <!-- Home Page Content -->
     <div class="home-page">
@@ -179,6 +190,7 @@
             const errorMessage = document.getElementById('error-message');
             const githubBtn = document.getElementById('github-btn');
             const uptimeBtn = document.getElementById('uptime-btn');
+            const buttonContainer = document.getElementById('button-container');
             const homePage = document.querySelector('.home-page');
             const loginPage = document.querySelector('.login-page');
 
@@ -188,8 +200,7 @@
                 homePage.style.display = "flex"; // Show the home page
                 errorMessage.style.display = "none";
                 setTimeout(() => {
-                    githubBtn.style.display = 'block'; // Show GitHub button
-                    uptimeBtn.style.display = 'block'; // Show Uptime button
+                    buttonContainer.style.display = 'flex'; // Show both buttons after login
                 }, 500);
             } else {
                 errorMessage.textContent = "Access Denied";
