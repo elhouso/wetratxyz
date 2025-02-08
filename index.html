@@ -3,125 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimal Site</title>
-    <link rel="icon" href="https://cdn.discordapp.com/attachments/1300396455705575474/1337907652730163351/icons8-notepad-50.png" type="image/png">
+    <title>Website with Animations</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
         }
+
         body {
-            background: url('https://cdn.discordapp.com/attachments/1300396455705575474/1337916049127112714/bailey-zindel-NRQV-hBF10M-unsplash.jpg?ex=67a92eeb&is=67a7dd6b&hm=7eaf678d2d450cec3982b0b04ac03bbffee0e12c40f425267be836d4484f401f&') no-repeat center center fixed;
+            font-family: Arial, sans-serif;
+            background-image: url('https://cdn.discordapp.com/attachments/1300396455705575474/1337916049127112714/bailey-zindel-NRQV-hBF10M-unsplash.jpg?ex=67a92eeb&is=67a7dd6b&hm=7eaf678d2d450cec3982b0b04ac03bbffee0e12c40f425267be836d4484f401f&');
             background-size: cover;
+            background-position: center;
             color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
         }
-        #authScreen {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.7); /* Added transparency to make the background visible */
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+
+        .container {
             text-align: center;
-            z-index: 10;
-        }
-        input {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
             width: 100%;
-            padding: 10px;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px;
             margin: 10px 0;
-            border: 1px solid #325ffe;
-            border-radius: 5px;
-            background: #222;
+            border: 2px solid #325ffe;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
             color: white;
-            text-align: center;
+            font-size: 1em;
+        }
+
+        .input-field:focus {
             outline: none;
+            border-color: #325ffe;
         }
-        input:focus {
-            border-color: #ffffff;
-        }
-        input::placeholder {
-            color: #aaa;
-        }
-        button {
-            padding: 10px 20px;
+
+        .button {
+            padding: 15px;
+            width: 100%;
             border: none;
-            border-radius: 5px;
-            background: #325ffe;
+            background-color: #325ffe;
             color: white;
+            border-radius: 10px;
+            font-size: 1.2em;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            transition: background-color 0.3s;
         }
-        button:hover {
-            background: #264bcc;
-            transform: scale(1.05);
+
+        .button:hover {
+            background-color: #1e3bbf;
         }
-        #mainContent {
-            display: none;
-            width: 90%;
-            height: 90vh;
-            background: #000;
-            border-radius: 20px;
-            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
+
+        .error {
+            color: red;
+            margin-top: 10px;
         }
+
         .github-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 40px;
-            height: 40px;
-            background: url('https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png') no-repeat center;
-            background-size: cover;
+            padding: 10px 15px;
+            background-color: #325ffe;
             border-radius: 50%;
-            animation: bounce 3s infinite;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
             display: none;
+            animation: bounce 1s infinite alternate;
         }
+
+        .github-btn img {
+            width: 30px;
+            height: 30px;
+        }
+
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .home-page .github-btn {
+            display: block;
         }
     </style>
 </head>
-<body>
-    <div id="authScreen">
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <button onclick="checkLogin()">Login</button>
+<body class="login-page">
+
+    <div class="container">
+        <h1>Login</h1>
+        <input type="password" id="password" class="input-field" placeholder="Enter Password" />
+        <button class="button" onclick="login()">Login</button>
+        <p id="error-message" class="error"></p>
     </div>
 
-    <div id="mainContent">
-        <h1>Main Content</h1>
-    </div>
-
-    <a href="https://github.com/elhouso/home" target="_blank" class="github-btn" id="githubBtn"></a>
+    <a id="github-btn" href="https://github.com/elhouso/home" class="github-btn" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
+    </a>
 
     <script>
-        function checkLogin() {
-            const user = document.getElementById("username").value;
-            const pass = document.getElementById("password").value;
-            if (user === "admin" && pass === "1234") {
-                document.getElementById("authScreen").style.display = "none";
-                document.getElementById("mainContent").style.display = "flex";
+        function login() {
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+            const githubBtn = document.getElementById('github-btn');
+
+            if (password === "1234") {
+                document.body.classList.remove("login-page");
+                document.body.classList.add("home-page");
+                errorMessage.style.display = "none";
                 setTimeout(() => {
-                    document.getElementById("mainContent").style.opacity = "1";
-                    document.getElementById("githubBtn").style.display = "block";
-                }, 200);
+                    githubBtn.style.display = 'block';
+                }, 500);
             } else {
-                alert("Incorrect login");
+                errorMessage.textContent = "Access denied";
+                setTimeout(() => {
+                    window.location.href = "https://google.com/";
+                }, 2000);
             }
         }
     </script>
