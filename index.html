@@ -93,6 +93,7 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            display: none; /* Hidden by default */
         }
 
         .footer a {
@@ -160,7 +161,7 @@
     </div>
 
     <!-- Footer -->
-    <div class="footer">
+    <div class="footer" id="footer">
         <a href="https://github.com/elhouso/home" target="_blank">GitHub</a>
         <a href="https://stats.uptimerobot.com/L6IsEPOM07" target="_blank">Site Status</a>
     </div>
@@ -171,12 +172,14 @@
             const errorMessage = document.getElementById('error-message');
             const homePage = document.querySelector('.home-page');
             const loginPage = document.querySelector('.login-page');
+            const footer = document.getElementById('footer');
 
             if (password === "1234") {
                 // Hide the login page and show the home page
                 loginPage.style.display = "none"; // Hide the login page
                 homePage.style.display = "flex"; // Show the home page
                 errorMessage.style.display = "none";
+                footer.style.display = "flex"; // Show the footer after login
             } else {
                 errorMessage.textContent = "Access Denied";
                 setTimeout(() => {
