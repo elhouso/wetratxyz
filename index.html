@@ -79,43 +79,31 @@
             margin-top: 10px;
         }
 
-        /* GitHub and additional button Styles */
-        .button-container {
+        /* Footer Styles */
+        .footer {
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 15px;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            gap: 20px;
+            justify-content: center;
             align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
         }
 
-        .github-btn, .uptime-btn {
-            width: 50px;
-            height: 50px;
-            background-color: #ffffff;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            cursor: pointer;
-            animation: bounce 1s infinite alternate;
-            display: none; /* Initially hidden */
+        .footer a {
+            text-decoration: none;
+            color: #325ffe;
+            font-size: 1.2em;
+            transition: color 0.3s;
         }
 
-        .github-btn img, .uptime-btn img {
-            width: 30px;
-            height: 30px;
-        }
-
-        @keyframes bounce {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-            100% {
-                transform: translateY(0);
-            }
+        .footer a:hover {
+            color: #1e3bbf;
         }
 
         /* Home page styles */
@@ -163,19 +151,6 @@
         <p id="error-message" class="error"></p>
     </div>
 
-    <!-- Button Container -->
-    <div id="button-container" class="button-container">
-        <!-- Uptime Button -->
-        <a id="uptime-btn" href="https://stats.uptimerobot.com/L6IsEPOM07" class="uptime-btn" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Clock_icon_1.png" alt="Uptime">
-        </a>
-
-        <!-- GitHub Button -->
-        <a id="github-btn" href="https://github.com/elhouso/home" class="github-btn" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
-        </a>
-    </div>
-
     <!-- Home Page Content -->
     <div class="home-page">
         <div class="container">
@@ -184,13 +159,16 @@
         </div>
     </div>
 
+    <!-- Footer -->
+    <div class="footer">
+        <a href="https://github.com/elhouso/home" target="_blank">GitHub</a>
+        <a href="https://stats.uptimerobot.com/L6IsEPOM07" target="_blank">Site Status</a>
+    </div>
+
     <script>
         function login() {
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
-            const githubBtn = document.getElementById('github-btn');
-            const uptimeBtn = document.getElementById('uptime-btn');
-            const buttonContainer = document.getElementById('button-container');
             const homePage = document.querySelector('.home-page');
             const loginPage = document.querySelector('.login-page');
 
@@ -199,9 +177,6 @@
                 loginPage.style.display = "none"; // Hide the login page
                 homePage.style.display = "flex"; // Show the home page
                 errorMessage.style.display = "none";
-                setTimeout(() => {
-                    buttonContainer.style.display = 'flex'; // Show both buttons after login
-                }, 500);
             } else {
                 errorMessage.textContent = "Access Denied";
                 setTimeout(() => {
