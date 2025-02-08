@@ -39,13 +39,23 @@
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
             text-align: center;
         }
-        input, button {
+        input {
+            width: 100%;
             padding: 10px;
-            margin: 10px;
-            border: none;
+            margin: 10px 0;
+            border: 1px solid #325ffe;
             border-radius: 5px;
+            background: #222;
+            color: white;
+            text-align: center;
+        }
+        input::placeholder {
+            color: #aaa;
         }
         button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
             background: #325ffe;
             color: white;
             cursor: pointer;
