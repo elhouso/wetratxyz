@@ -23,7 +23,6 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            transition: all 0.3s ease;
         }
 
         .container {
@@ -108,16 +107,8 @@
             }
         }
 
-        .home-page {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+        .home-page .github-btn {
+            display: block;
         }
 
         .home-page .container {
@@ -139,6 +130,7 @@
             margin-top: 10px;
             color: rgba(255, 255, 255, 0.8);
         }
+
     </style>
 </head>
 <body class="login-page">
@@ -157,7 +149,7 @@
     </a>
 
     <!-- Home Page (hidden initially) -->
-    <div class="home-page">
+    <div class="home-page" style="display:none;">
         <div class="container">
             <h1>Subscriptions</h1>
             <p>Welcome to the subscription page! Here's where the content goes.</p>
@@ -174,8 +166,8 @@
 
             if (password === "1234") {
                 // Hide the login page and show the home page
-                loginPage.style.display = "none";
-                homePage.style.display = "flex";
+                loginPage.style.display = "none"; // Hide login page
+                homePage.style.display = "flex"; // Show home page
                 errorMessage.style.display = "none";
                 setTimeout(() => {
                     githubBtn.style.display = 'block';
