@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscriptions</title>
+    <title>Minimal Site</title>
+    <link rel="icon" href="https://cdn.discordapp.com/attachments/1300396455705575474/1337907652730163351/icons8-notepad-50.png" type="image/png">
     <style>
         * {
             margin: 0;
@@ -14,110 +15,96 @@
         body {
             background: linear-gradient(0deg, #000000, #ffffff);
             background-size: 400% 400%;
-            animation: gradientRotate 10s infinite linear;
+            animation: gradientRotate 15s infinite linear;
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            overflow-y: auto;
-            padding: 20px;
+            overflow: hidden;
         }
         @keyframes gradientRotate {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        #passwordScreen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
-            transition: opacity 0.5s ease-in-out;
+        #authScreen {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+            text-align: center;
         }
-        input {
+        input, button {
             padding: 10px;
             margin: 10px;
             border: none;
             border-radius: 5px;
         }
         button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background: #333;
+            background: #325ffe;
             color: white;
             cursor: pointer;
-            transition: background 0.3s ease;
         }
         button:hover {
-            background: #555;
+            background: #264bcc;
         }
-        #content {
+        #mainContent {
             display: none;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            width: 100%;
-            max-width: 1000px;
-        }
-        .fade-in {
-            opacity: 1 !important;
-        }
-        .content-box {
-            background: rgba(0, 0, 0, 0.85);
-            padding: 50px;
+            width: 90%;
+            height: 90vh;
+            background: #000;
             border-radius: 20px;
             box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            max-width: 800px;
-            margin: auto;
+        }
+        .github-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: url('https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png') no-repeat center;
+            background-size: cover;
+            border-radius: 50%;
+            animation: bounce 3s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
 <body>
-    <div id="passwordScreen">
-        <h2>Enter Password</h2>
-        <input type="password" id="passwordInput" placeholder="Password">
-        <button onclick="checkPassword()">Submit</button>
+    <div id="authScreen">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="checkLogin()">Login</button>
     </div>
 
-    <div id="content">
-        <div class="content-box">
-            <h1>Subscriptions</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at risus nec magna pharetra viverra.</p>
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
-            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.</p>
-        </div>
+    <div id="mainContent">
+        <h1>Main Content</h1>
     </div>
+
+    <a href="https://github.com" target="_blank" class="github-btn"></a>
 
     <script>
-        function checkPassword() {
-            const password = document.getElementById("passwordInput").value;
-            if (password === "1234") {
-                document.getElementById("passwordScreen").style.opacity = "0";
-                setTimeout(() => {
-                    document.getElementById("passwordScreen").style.display = "none";
-                    document.getElementById("content").style.display = "block";
-                    setTimeout(() => {
-                        document.getElementById("content").classList.add("fade-in");
-                    }, 100);
-                }, 500);
+        function checkLogin() {
+            const user = document.getElementById("username").value;
+            const pass = document.getElementById("password").value;
+            if (user === "admin" && pass === "1234") {
+                document.getElementById("authScreen").style.display = "none";
+                document.getElementById("mainContent").style.display = "flex";
             } else {
-                alert("Access Denied! Please try again later.");
+                alert("Incorrect login");
             }
         }
     </script>
