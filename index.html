@@ -12,7 +12,7 @@
             font-family: Arial, sans-serif;
         }
         body {
-            background: linear-gradient(0deg, #000000, #0d0d0d);
+            background: linear-gradient(0deg, #000000, #ffffff);
             background-size: 400% 400%;
             animation: gradientRotate 10s infinite linear;
             color: white;
@@ -21,6 +21,7 @@
             justify-content: center;
             height: 100vh;
             overflow-y: auto;
+            padding: 20px;
         }
         @keyframes gradientRotate {
             0% {
@@ -68,7 +69,6 @@
         }
         #content {
             display: none;
-            padding: 50px;
             opacity: 0;
             transition: opacity 1s ease-in-out;
             width: 100%;
@@ -76,6 +76,15 @@
         }
         .fade-in {
             opacity: 1 !important;
+        }
+        .content-box {
+            background: rgba(0, 0, 0, 0.85);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+            text-align: center;
+            max-width: 600px;
+            margin: auto;
         }
     </style>
 </head>
@@ -87,8 +96,12 @@
     </div>
 
     <div id="content">
-        <h1>Subscriptions</h1>
-        " + "\n        ".join([f'<p>Row {i+1}: Lorem ipsum dolor sit amet...</p>' for i in range(100)]) + "
+        <div class="content-box">
+            <h1>Subscriptions</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at risus nec magna pharetra viverra.</p>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.</p>
+        </div>
     </div>
 
     <script>
