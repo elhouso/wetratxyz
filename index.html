@@ -12,12 +12,26 @@
             font-family: Arial, sans-serif;
         }
         body {
-            background: linear-gradient(to bottom, #000000, #0d0d0d);
+            background: linear-gradient(0deg, #000000, #0d0d0d);
+            background-size: 400% 400%;
+            animation: gradientRotate 10s infinite linear;
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
+            overflow-y: auto;
+        }
+        @keyframes gradientRotate {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
         #passwordScreen {
             display: flex;
@@ -29,6 +43,10 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
             transition: opacity 0.5s ease-in-out;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
         input {
             padding: 10px;
@@ -53,6 +71,8 @@
             padding: 50px;
             opacity: 0;
             transition: opacity 1s ease-in-out;
+            width: 100%;
+            max-width: 800px;
         }
         .fade-in {
             opacity: 1 !important;
@@ -68,8 +88,7 @@
 
     <div id="content">
         <h1>Subscriptions</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet...</p>
-        <p>More text here...</p>
+        " + "\n        ".join([f'<p>Row {i+1}: Lorem ipsum dolor sit amet...</p>' for i in range(100)]) + "
     </div>
 
     <script>
