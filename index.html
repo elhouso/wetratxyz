@@ -33,7 +33,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9);
+            background: #000;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
@@ -49,9 +49,11 @@
             background: #325ffe;
             color: white;
             cursor: pointer;
+            transition: transform 0.2s ease;
         }
         button:hover {
             background: #264bcc;
+            transform: scale(1.05);
         }
         #mainContent {
             display: none;
@@ -64,6 +66,8 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
         }
         .github-btn {
             position: fixed;
@@ -75,6 +79,7 @@
             background-size: cover;
             border-radius: 50%;
             animation: bounce 3s infinite;
+            display: none;
         }
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
@@ -84,7 +89,6 @@
 </head>
 <body>
     <div id="authScreen">
-        <h2>Login</h2>
         <input type="text" id="username" placeholder="Username">
         <input type="password" id="password" placeholder="Password">
         <button onclick="checkLogin()">Login</button>
@@ -94,7 +98,7 @@
         <h1>Main Content</h1>
     </div>
 
-    <a href="https://github.com" target="_blank" class="github-btn"></a>
+    <a href="https://github.com/elhouso/home" target="_blank" class="github-btn" id="githubBtn"></a>
 
     <script>
         function checkLogin() {
@@ -103,6 +107,10 @@
             if (user === "admin" && pass === "1234") {
                 document.getElementById("authScreen").style.display = "none";
                 document.getElementById("mainContent").style.display = "flex";
+                setTimeout(() => {
+                    document.getElementById("mainContent").style.opacity = "1";
+                    document.getElementById("githubBtn").style.display = "block";
+                }, 200);
             } else {
                 alert("Incorrect login");
             }
