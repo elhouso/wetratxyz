@@ -248,9 +248,9 @@
         function checkRememberedUser() {
             const cookie = getCookie('remembered_user');
             if (cookie === "true") {
-                loginPage.style.display = "none"; // Hide the login page
-                homePage.style.display = "flex"; // Show the home page
-                footer.style.display = "flex"; // Show the footer
+                document.querySelector('.login-page').style.display = "none"; // Hide login page
+                document.querySelector('.home-page').style.display = "flex"; // Show home page
+                document.getElementById('footer').style.display = "flex"; // Show footer
             }
         }
 
@@ -259,9 +259,6 @@
             const password = document.getElementById('password').value;
             const rememberMeCheckbox = document.getElementById('rememberMe');
             const errorMessage = document.getElementById('error-message');
-            const homePage = document.querySelector('.home-page');
-            const loginPage = document.querySelector('.login-page');
-            const footer = document.getElementById('footer');
 
             if (password === "999999") {
                 if (rememberMeCheckbox.checked) {
@@ -269,11 +266,11 @@
                     setCookie('remembered_user', 'true', 2);
                 }
 
-                // Hide the login page and show the home page
-                loginPage.style.display = "none";
-                homePage.style.display = "flex";
+                // Hide login page, show home page
+                document.querySelector('.login-page').style.display = "none";
+                document.querySelector('.home-page').style.display = "flex";
                 errorMessage.style.display = "none";
-                footer.style.display = "flex";
+                document.getElementById('footer').style.display = "flex";
             } else {
                 errorMessage.textContent = "Access Denied";
                 setTimeout(() => {
