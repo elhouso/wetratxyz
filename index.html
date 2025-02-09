@@ -225,7 +225,7 @@
     <!-- Login Screen -->
     <div class="login-page">
         <h1>Login</h1>
-        <input type="password" id="password" class="input-field" placeholder="Enter Password" maxlength="4" oninput="validatePassword()"/>
+        <input type="password" id="password" class="input-field" placeholder="Enter Password" maxlength="6" oninput="validatePassword()"/>
         <button class="button" onclick="login()">Login</button>
         <p id="error-message" class="error"></p>
     </div>
@@ -252,7 +252,7 @@
             const loginPage = document.querySelector('.login-page');
             const footer = document.getElementById('footer');
 
-            if (password === "1234") {
+            if (password === "999999") {
                 // Hide the login page and show the home page
                 loginPage.style.display = "none"; // Hide the login page
                 homePage.style.display = "flex"; // Show the home page
