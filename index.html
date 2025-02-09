@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subscriptions</title>
     <link rel="icon" href="https://cdn.discordapp.com/attachments/1300396455705575474/1337907652730163351/icons8-notepad-50.png?ex=67a92719&is=67a7d599&hm=2d31a1ef32b4763930025ecd7f9c6fdb42f69bcbba9fff66d973bdbbf34278e9&">
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600&display=swap" rel="stylesheet"> <!-- Public Sans Font Import -->
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,7 +14,7 @@
         }
 
         body {
-            font-family: 'Public Sans', sans-serif; /* Applied Public Sans Font */
+            font-family: 'Public Sans', sans-serif;
             background-image: url('https://cdn.discordapp.com/attachments/1300396455705575474/1337937157678960701/New_Project.png?ex=67a94294&is=67a7f114&hm=aa2c0d1558f48464b19ede62668f170f187ad7acb596fd0c9f473afc1ca9ee9f&');
             background-size: cover;
             background-position: center;
@@ -26,7 +26,6 @@
             overflow: hidden;
         }
 
-        /* Login screen styles */
         .login-page {
             display: block;
             text-align: center;
@@ -35,7 +34,7 @@
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
             max-width: 500px;
-            width: 90%; /* Change to ensure it's responsive */
+            width: 90%;
             margin: auto;
         }
 
@@ -81,7 +80,6 @@
             margin-top: 10px;
         }
 
-        /* Footer Styles */
         .footer {
             position: fixed;
             bottom: 20px;
@@ -95,8 +93,8 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-            display: none; /* Hidden by default */
-            max-width: 90%; /* Ensures it's responsive */
+            display: none;
+            max-width: 90%;
             width: auto;
         }
 
@@ -111,9 +109,8 @@
             color: #1e3bbf;
         }
 
-        /* Home page styles */
         .home-page {
-            display: none; /* Start hidden */
+            display: none;
             position: absolute;
             top: 0;
             left: 0;
@@ -144,7 +141,6 @@
             color: rgba(255, 255, 255, 0.8);
         }
 
-        /* Responsive design */
         @media screen and (max-width: 768px) {
             .login-page h1 {
                 font-size: 1.5em;
@@ -161,7 +157,7 @@
 
             .footer {
                 bottom: 10px;
-                max-width: 95%; /* Reduce max-width on small screens */
+                max-width: 95%;
                 padding: 10px;
             }
 
@@ -226,6 +222,9 @@
     <div class="login-page">
         <h1>Login</h1>
         <input type="password" id="password" class="input-field" placeholder="Enter Password" maxlength="6" oninput="validatePassword()"/>
+        <label>
+            <input type="checkbox" id="rememberMe"> Remember Me
+        </label>
         <button class="button" onclick="login()">Login</button>
         <p id="error-message" class="error"></p>
     </div>
@@ -245,19 +244,36 @@
     </div>
 
     <script>
+        // Check if the user is remembered via cookies
+        function checkRememberedUser() {
+            const cookie = getCookie('remembered_user');
+            if (cookie === "true") {
+                loginPage.style.display = "none"; // Hide the login page
+                homePage.style.display = "flex"; // Show the home page
+                footer.style.display = "flex"; // Show the footer
+            }
+        }
+
+        // Function to login
         function login() {
             const password = document.getElementById('password').value;
+            const rememberMeCheckbox = document.getElementById('rememberMe');
             const errorMessage = document.getElementById('error-message');
             const homePage = document.querySelector('.home-page');
             const loginPage = document.querySelector('.login-page');
             const footer = document.getElementById('footer');
 
             if (password === "999999") {
+                if (rememberMeCheckbox.checked) {
+                    // Set the cookie for 2 days if "Remember Me" is checked
+                    setCookie('remembered_user', 'true', 2);
+                }
+
                 // Hide the login page and show the home page
-                loginPage.style.display = "none"; // Hide the login page
-                homePage.style.display = "flex"; // Show the home page
+                loginPage.style.display = "none";
+                homePage.style.display = "flex";
                 errorMessage.style.display = "none";
-                footer.style.display = "flex"; // Show the footer after login
+                footer.style.display = "flex";
             } else {
                 errorMessage.textContent = "Access Denied";
                 setTimeout(() => {
@@ -266,10 +282,37 @@
             }
         }
 
+        // Helper function to set a cookie
+        function setCookie(name, value, days) {
+            const d = new Date();
+            d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000)); // Set expiry time (in milliseconds)
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        }
+
+        // Helper function to get a cookie
+        function getCookie(name) {
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i].trim();
+                if (c.indexOf(name + "=") === 0) {
+                    return c.substring(name.length + 1, c.length);
+                }
+            }
+            return "";
+        }
+
+        // Validate password input (only numbers)
         function validatePassword() {
             const password = document.getElementById('password');
             password.value = password.value.replace(/[^0-9]/g, ''); // Allow only numbers
         }
+
+        // Check if user is remembered when the page loads
+        window.onload = function () {
+            checkRememberedUser();
+        };
     </script>
 
 </body>
