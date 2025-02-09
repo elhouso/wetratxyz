@@ -225,7 +225,7 @@
     <!-- Login Screen -->
     <div class="login-page">
         <h1>Login</h1>
-        <input type="password" id="password" class="input-field" placeholder="Enter Password" />
+        <input type="text" id="password" class="input-field" placeholder="Enter Password" maxlength="4" oninput="validatePassword()"/>
         <button class="button" onclick="login()">Login</button>
         <p id="error-message" class="error"></p>
     </div>
@@ -264,6 +264,11 @@
                     window.location.href = "https://google.com/";
                 }, 2000);
             }
+        }
+
+        function validatePassword() {
+            const password = document.getElementById('password');
+            password.value = password.value.replace(/[^0-9]/g, ''); // Allow only numbers
         }
     </script>
 
