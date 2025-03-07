@@ -1,36 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rats</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Discover the Amazing World of Rats</h1>
-    </header>
-    <main>
-        <section id="rat-facts">
-            <h2>Interesting Rat Facts</h2>
-            <ul>
-                <li>Rats can hold their breath for up to 3 minutes.</li>
-                <li>They are excellent swimmers and can tread water for up to 3 days.</li>
-                <li>Rats have a highly developed sense of taste and can distinguish between over 20,000 different flavors.</li>
-            </ul>
-        </section>
-        <section id="rat-images">
-            <h2>Beautiful Rat Images</h2>
-            <div class="image-container">
-                <img src="https://via.placeholder.com/300" alt="Rat Image 1">
-                <img src="https://via.placeholder.com/300" alt="Rat Image 2">
-                <img src="https://via.placeholder.com/300" alt="Rat Image 3">
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2023 Rat Facts</p>
-    </footer>
-    <script src="script.js"></script>
-</body>
-</html>
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Cheese, Rat } from "lucide-react";
+
+export default function RatsWebsite() {
+  const [cheeseCount, setCheeseCount] = useState(0);
+
+  useEffect(() => {
+    document.body.style.backgroundColor = "#FFEB3B"; // Cheese yellow background
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center text-gray-900">
+      <motion.h1 
+        className="text-6xl font-bold mb-6" 
+        initial={{ opacity: 0, y: -20 }} 
+        animate={{ opacity: 1, y: 0 }}
+      >
+        🧀 Welcome to Rat Paradise! 🐀
+      </motion.h1>
+      
+      <motion.img 
+        src="https://i.imgur.com/4Z9YdDb.jpeg" 
+        alt="Wet Rat" 
+        className="w-64 h-64 rounded-full border-4 border-gray-800 shadow-lg" 
+        initial={{ scale: 0 }} 
+        animate={{ scale: 1 }} 
+        transition={{ duration: 0.5 }}
+      />
+
+      <p className="text-xl mt-4">We love rats. Especially wet ones. 🐁</p>
+
+      <motion.div 
+        className="mt-6"
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1 }} 
+        transition={{ delay: 0.5 }}
+      >
+        <Button 
+          className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-xl shadow-lg"
+          onClick={() => setCheeseCount(cheeseCount + 1)}
+        >
+          <Cheese size={20} /> Give Cheese ({cheeseCount})
+        </Button>
+      </motion.div>
+
+      <motion.div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Card className="p-4 bg-white shadow-lg">
+          <CardContent className="flex flex-col items-center">
+            <Rat size={50} className="text-gray-700" />
+            <h2 className="text-2xl font-semibold mt-2">Rats Are Smart</h2>
+            <p className="text-gray-600">They can solve puzzles and even laugh when tickled!</p>
+          </CardContent>
+        </Card>
+        
+        <Card className="p-4 bg-white shadow-lg">
+          <CardContent className="flex flex-col items-center">
+            <Cheese size={50} className="text-yellow-500" />
+            <h2 className="text-2xl font-semibold mt-2">Rats Love Cheese</h2>
+            <p className="text-gray-600">But they actually prefer peanut butter. Sneaky little guys.</p>
+          </CardContent>
+        </Card>
+      </motion.div>
+    </div>
+  );
+}
