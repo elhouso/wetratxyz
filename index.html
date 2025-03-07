@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News & Blog</title>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"></script>
     <style>
         body {
             background-color: #121212;
@@ -69,21 +71,32 @@
             <textarea id="content" placeholder="Post Content"></textarea>
             <input type="text" id="category" placeholder="Category">
             <input type="text" id="tags" placeholder="Tags (comma separated)">
-            <input type="file" id="image">
             <button onclick="addPost()">Publish</button>
         </div>
     </div>
 
     <script>
-        let storedPassword = "1234";
+        const firebaseConfig = {
+            apiKey: "AIzaSyCFPaqJn4UEXfWBec3HnZsi7tt1xCJ7Uic",
+            authDomain: "wetratxyz.firebaseapp.com",
+            databaseURL: "https://wetratxyz-default-rtdb.firebaseio.com",
+            projectId: "wetratxyz",
+            storageBucket: "wetratxyz.firebasestorage.app",
+            messagingSenderId: "720006723992",
+            appId: "1:720006723992:web:b4cafbeb1d114438f313ed",
+            measurementId: "G-JKP9SW2FRV"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
 
         function showAdminPanel() {
             document.getElementById('admin-panel').style.display = 'block';
         }
 
         function checkPassword() {
-            let inputPass = document.getElementById('password').value;
-            if (inputPass === storedPassword) {
+            const inputPass = document.getElementById('password').value;
+            if (inputPass === "1234") {
                 document.getElementById('post-form').style.display = 'block';
             } else {
                 alert('Incorrect password');
@@ -91,40 +104,49 @@
         }
 
         function addPost() {
-            let title = document.getElementById('title').value;
-            let content = document.getElementById('content').value;
-            let category = document.getElementById('category').value;
-            let tags = document.getElementById('tags').value;
-            let image = document.getElementById('image').files[0];
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+            const category = document.getElementById('category').value;
+            const tags = document.getElementById('tags').value;
 
             if (!title || !content) {
                 alert('Title and content are required!');
                 return;
             }
 
-            let reader = new FileReader();
-            reader.onload = function (e) {
-                let postHtml = `<div class='post'>
-                                    <h2>${title}</h2>
-                                    <p><strong>Category:</strong> ${category}</p>
-                                    <p><strong>Tags:</strong> ${tags}</p>
-                                    <img src='${e.target.result}' alt='Post Image'>
-                                    <p>${content}</p>
-                                </div>`;
-                document.getElementById('posts').innerHTML += postHtml;
-            };
-            if (image) {
-                reader.readAsDataURL(image);
-            } else {
-                let postHtml = `<div class='post'>
-                                    <h2>${title}</h2>
-                                    <p><strong>Category:</strong> ${category}</p>
-                                    <p><strong>Tags:</strong> ${tags}</p>
-                                    <p>${content}</p>
-                                </div>`;
-                document.getElementById('posts').innerHTML += postHtml;
-            }
+            db.collection("posts").add({
+                title: title,
+                content: content,
+                category: category,
+                tags: tags,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                alert("Post added successfully!");
+                loadPosts();
+            }).catch(error => {
+                console.error("Error adding post: ", error);
+            });
         }
+
+        function loadPosts() {
+            document.getElementById('posts').innerHTML = "";
+            db.collection("posts").orderBy("timestamp", "desc").get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const postHtml = `
+                        <div class="post">
+                            <h2>${data.title}</h2>
+                            <p><strong>Category:</strong> ${data.category}</p>
+                            <p><strong>Tags:</strong> ${data.tags}</p>
+                            <p>${data.content}</p>
+                        </div>
+                    `;
+                    document.getElementById('posts').innerHTML += postHtml;
+                });
+            });
+        }
+
+        loadPosts();
     </script>
 </body>
 </html>
