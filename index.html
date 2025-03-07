@@ -3,314 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
-    <link rel="icon" href="https://cdn.discordapp.com/attachments/1300396455705575474/1337907652730163351/icons8-notepad-50.png?ex=67a92719&is=67a7d599&hm=2d31a1ef32b4763930025ecd7f9c6fdb42f69bcbba9fff66d973bdbbf34278e9&">
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Public Sans', sans-serif;
-            background-image: url('https://cdn.discordapp.com/attachments/1300396455705575474/1337937157678960701/New_Project.png?ex=67a94294&is=67a7f114&hm=aa2c0d1558f48464b19ede62668f170f187ad7acb596fd0c9f473afc1ca9ee9f&');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .login-page {
-            display: block;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 50px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            max-width: 500px;
-            width: 90%;
-            margin: auto;
-        }
-
-        .login-page h1 {
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border: 2px solid #325ffe;
-            border-radius: 10px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1em;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: #325ffe;
-        }
-
-        .button {
-            padding: 15px;
-            width: 100%;
-            border: none;
-            background-color: #325ffe;
-            color: white;
-            border-radius: 10px;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .button:hover {
-            background-color: #1e3bbf;
-        }
-
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
-
-        .footer {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 15px;
-            border-radius: 15px;
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-            display: none;
-            max-width: 90%;
-            width: auto;
-        }
-
-        .footer a {
-            text-decoration: none;
-            color: #325ffe;
-            font-size: 1.2em;
-            transition: color 0.3s;
-        }
-
-        .footer a:hover {
-            color: #1e3bbf;
-        }
-
-        .home-page {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .home-page .container {
-            max-width: 800px;
-            width: 90%;
-            padding: 100px;
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .home-page .container h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-
-        .home-page .container p {
-            font-size: 1.2em;
-            margin-top: 10px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        @media screen and (max-width: 768px) {
-            .login-page h1 {
-                font-size: 1.5em;
-            }
-
-            .input-field {
-                padding: 12px;
-            }
-
-            .button {
-                font-size: 1.1em;
-                padding: 12px;
-            }
-
-            .footer {
-                bottom: 10px;
-                max-width: 95%;
-                padding: 10px;
-            }
-
-            .footer a {
-                font-size: 1em;
-            }
-
-            .home-page .container {
-                padding: 50px;
-            }
-
-            .home-page .container h1 {
-                font-size: 2.5em;
-            }
-
-            .home-page .container p {
-                font-size: 1em;
-            }
-        }
-
-        @media screen and (max-width: 480px) {
-            .login-page h1 {
-                font-size: 1.2em;
-            }
-
-            .input-field {
-                padding: 10px;
-            }
-
-            .button {
-                font-size: 1em;
-                padding: 10px;
-            }
-
-            .footer {
-                bottom: 5px;
-                padding: 8px;
-            }
-
-            .footer a {
-                font-size: 0.9em;
-            }
-
-            .home-page .container {
-                padding: 30px;
-            }
-
-            .home-page .container h1 {
-                font-size: 2em;
-            }
-
-            .home-page .container p {
-                font-size: 0.9em;
-            }
-        }
-
-    </style>
+    <title>Rats</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <!-- Login Screen -->
-    <div class="login-page">
-        <h1>Login</h1>
-        <input type="password" id="password" class="input-field" placeholder="Enter Password" maxlength="6" oninput="validatePassword()"/>
-        <label>
-            <input type="checkbox" id="rememberMe"> Remember Me
-        </label>
-        <button class="button" onclick="login()">Login</button>
-        <p id="error-message" class="error"></p>
-    </div>
-
-    <!-- Home Page Content -->
-    <div class="home-page">
-        <div class="container">
-            <h1>Title</h1>
-            <p>nullTextHere</p>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer" id="footer">
-        <a href="https://github.com/elhouso/home" target="_blank">GitHub</a>
-        <a href="https://stats.uptimerobot.com/L6IsEPOM07" target="_blank">Site Status</a>
-    </div>
-
-    <script>
-        // Check if the user is remembered via cookies
-        function checkRememberedUser() {
-            const cookie = getCookie('remembered_user');
-            if (cookie === "true") {
-                document.querySelector('.login-page').style.display = "none"; // Hide login page
-                document.querySelector('.home-page').style.display = "flex"; // Show home page
-                document.getElementById('footer').style.display = "flex"; // Show footer
-            }
-        }
-
-        // Function to login
-        function login() {
-            const password = document.getElementById('password').value;
-            const rememberMeCheckbox = document.getElementById('rememberMe');
-            const errorMessage = document.getElementById('error-message');
-
-            if (password === "999999") {
-                if (rememberMeCheckbox.checked) {
-                    // Set the cookie for 2 days if "Remember Me" is checked
-                    setCookie('remembered_user', 'true', 2);
-                }
-
-                // Hide login page, show home page
-                document.querySelector('.login-page').style.display = "none";
-                document.querySelector('.home-page').style.display = "flex";
-                errorMessage.style.display = "none";
-                document.getElementById('footer').style.display = "flex";
-            } else {
-                errorMessage.textContent = "Access Denied";
-                setTimeout(() => {
-                    window.location.href = "https://askleo.com/wp-content/uploads/2010/04/access-denied.jpg";
-                }, 2000);
-            }
-        }
-
-        // Helper function to set a cookie
-        function setCookie(name, value, days) {
-            const d = new Date();
-            d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000)); // Set expiry time (in milliseconds)
-            let expires = "expires=" + d.toUTCString();
-            document.cookie = name + "=" + value + ";" + expires + ";path=/";
-        }
-
-        // Helper function to get a cookie
-        function getCookie(name) {
-            let decodedCookie = decodeURIComponent(document.cookie);
-            let ca = decodedCookie.split(';');
-            for (let i = 0; i < ca.length; i++) {
-                let c = ca[i].trim();
-                if (c.indexOf(name + "=") === 0) {
-                    return c.substring(name.length + 1, c.length);
-                }
-            }
-            return "";
-        }
-
-        // Validate password input (only numbers)
-        function validatePassword() {
-            const password = document.getElementById('password');
-            password.value = password.value.replace(/[^0-9]/g, ''); // Allow only numbers
-        }
-
-        // Check if user is remembered when the page loads
-        window.onload = function () {
-            checkRememberedUser();
-        };
-    </script>
-
+    <header>
+        <h1>Discover the Amazing World of Rats</h1>
+    </header>
+    <main>
+        <section id="rat-facts">
+            <h2>Interesting Rat Facts</h2>
+            <ul>
+                <li>Rats can hold their breath for up to 3 minutes.</li>
+                <li>They are excellent swimmers and can tread water for up to 3 days.</li>
+                <li>Rats have a highly developed sense of taste and can distinguish between over 20,000 different flavors.</li>
+            </ul>
+        </section>
+        <section id="rat-images">
+            <h2>Beautiful Rat Images</h2>
+            <div class="image-container">
+                <img src="https://via.placeholder.com/300" alt="Rat Image 1">
+                <img src="https://via.placeholder.com/300" alt="Rat Image 2">
+                <img src="https://via.placeholder.com/300" alt="Rat Image 3">
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Rat Facts</p>
+    </footer>
+    <script src="script.js"></script>
 </body>
 </html>
