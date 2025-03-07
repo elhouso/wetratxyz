@@ -1,85 +1,25 @@
-import { useState, useEffect } from "react";
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "firebase/firestore";
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCFPaqJn4UEXfWBec3HnZsi7tt1xCJ7Uic",
-  authDomain: "wetratxyz.firebaseapp.com",
-  databaseURL: "https://wetratxyz-default-rtdb.firebaseio.com",
-  projectId: "wetratxyz",
-  storageBucket: "wetratxyz.firebasestorage.app",
-  messagingSenderId: "720006723992",
-  appId: "1:720006723992:web:b4cafbeb1d114438f313ed",
-  measurementId: "G-JKP9SW2FRV"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
-
-export default function NewsBlog() {
-  const [user, setUser] = useState(null);
-  const [posts, setPosts] = useState([]);
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-
-  useEffect(() => {
-    async function fetchPosts() {
-      const querySnapshot = await getDocs(collection(db, "posts"));
-      setPosts(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-    }
-    fetchPosts();
-  }, []);
-
-  const handleLogin = async () => {
-    const result = await signInWithPopup(auth, provider);
-    setUser(result.user);
-  };
-
-  const handleLogout = async () => {
-    await signOut(auth);
-    setUser(null);
-  };
-
-  const handlePost = async () => {
-    if (title && content) {
-      await addDoc(collection(db, "posts"), { title, content, timestamp: new Date() });
-      setTitle("");
-      setContent("");
-    }
-  };
-
-  const handleDelete = async (id) => {
-    await deleteDoc(doc(db, "posts", id));
-    setPosts(posts.filter(post => post.id !== id));
-  };
-
-  return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">News & Blog</h1>
-      {!user ? (
-        <button onClick={handleLogin} className="mt-2 p-2 bg-blue-500 text-white rounded">Login with Google</button>
-      ) : (
-        <div>
-          <button onClick={handleLogout} className="mt-2 p-2 bg-red-500 text-white rounded">Logout</button>
-          <div className="mt-4">
-            <input className="border p-2 w-full" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-            <textarea className="border p-2 w-full mt-2" placeholder="Content" value={content} onChange={(e) => setContent(e.target.value)}></textarea>
-            <button onClick={handlePost} className="mt-2 p-2 bg-green-500 text-white rounded">Post</button>
-          </div>
-        </div>
-      )}
-      <div className="mt-4">
-        {posts.map(post => (
-          <div key={post.id} className="border p-4 mt-2">
-            <h2 className="text-xl font-bold">{post.title}</h2>
-            <p>{post.content}</p>
-            {user && <button onClick={() => handleDelete(post.id)} className="mt-2 p-2 bg-red-500 text-white rounded">Delete</button>}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title Here</title>
+    <link rel="icon" href="https://cdn.discordapp.com/attachments/1300396455705575474/1337707426249572403/icons8-favicon-94.png" type="image/png">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    Hello World
+</body>
+</html>
