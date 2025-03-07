@@ -1,181 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News & Blog</title>
-    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"></script>
-    <style>
-        body {
-            background-color: #121212;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-        }
-        .post {
-            background: #1e1e1e;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-        }
-        img {
-            max-width: 100%;
-            border-radius: 5px;
-        }
-        .admin-panel {
-            display: none;
-            background: #333;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-        input, textarea, select {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            background: #222;
-            color: white;
-            border: 1px solid #444;
-            border-radius: 5px;
-        }
-        button {
-            background: #6200ea;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        button:hover {
-            background: #3700b3;
-        }
-    </style>
-</head>
-<body>
-    <h1>News & Blog</h1>
-    <div id="posts"></div>
+import { useState, useEffect } from "react";
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 
-    <!-- Login Form -->
-    <div id="login-panel">
-        <h2>Login</h2>
-        <input type="email" id="email" placeholder="Enter Email">
-        <input type="password" id="password" placeholder="Enter Password">
-        <button onclick="login()">Login</button>
-    </div>
+const firebaseConfig = {
+  apiKey: "AIzaSyCFPaqJn4UEXfWBec3HnZsi7tt1xCJ7Uic",
+  authDomain: "wetratxyz.firebaseapp.com",
+  databaseURL: "https://wetratxyz-default-rtdb.firebaseio.com",
+  projectId: "wetratxyz",
+  storageBucket: "wetratxyz.firebasestorage.app",
+  messagingSenderId: "720006723992",
+  appId: "1:720006723992:web:b4cafbeb1d114438f313ed",
+  measurementId: "G-JKP9SW2FRV"
+};
 
-    <!-- Admin Panel (Only visible after login) -->
-    <div class="admin-panel" id="admin-panel" style="display:none;">
-        <h2>Admin Panel</h2>
-        <button onclick="logout()">Logout</button>
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
-        <div id="post-form" style="display:none;">
-            <h3>Add New Post</h3>
-            <input type="text" id="title" placeholder="Post Title">
-            <textarea id="content" placeholder="Post Content"></textarea>
-            <input type="text" id="category" placeholder="Category">
-            <input type="text" id="tags" placeholder="Tags (comma separated)">
-            <button onclick="addPost()">Publish</button>
+export default function NewsBlog() {
+  const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  useEffect(() => {
+    async function fetchPosts() {
+      const querySnapshot = await getDocs(collection(db, "posts"));
+      setPosts(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+    }
+    fetchPosts();
+  }, []);
+
+  const handleLogin = async () => {
+    const result = await signInWithPopup(auth, provider);
+    setUser(result.user);
+  };
+
+  const handleLogout = async () => {
+    await signOut(auth);
+    setUser(null);
+  };
+
+  const handlePost = async () => {
+    if (title && content) {
+      await addDoc(collection(db, "posts"), { title, content, timestamp: new Date() });
+      setTitle("");
+      setContent("");
+    }
+  };
+
+  const handleDelete = async (id) => {
+    await deleteDoc(doc(db, "posts", id));
+    setPosts(posts.filter(post => post.id !== id));
+  };
+
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold">News & Blog</h1>
+      {!user ? (
+        <button onClick={handleLogin} className="mt-2 p-2 bg-blue-500 text-white rounded">Login with Google</button>
+      ) : (
+        <div>
+          <button onClick={handleLogout} className="mt-2 p-2 bg-red-500 text-white rounded">Logout</button>
+          <div className="mt-4">
+            <input className="border p-2 w-full" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <textarea className="border p-2 w-full mt-2" placeholder="Content" value={content} onChange={(e) => setContent(e.target.value)}></textarea>
+            <button onClick={handlePost} className="mt-2 p-2 bg-green-500 text-white rounded">Post</button>
+          </div>
         </div>
+      )}
+      <div className="mt-4">
+        {posts.map(post => (
+          <div key={post.id} className="border p-4 mt-2">
+            <h2 className="text-xl font-bold">{post.title}</h2>
+            <p>{post.content}</p>
+            {user && <button onClick={() => handleDelete(post.id)} className="mt-2 p-2 bg-red-500 text-white rounded">Delete</button>}
+          </div>
+        ))}
+      </div>
     </div>
-
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyCFPaqJn4UEXfWBec3HnZsi7tt1xCJ7Uic",
-            authDomain: "wetratxyz.firebaseapp.com",
-            databaseURL: "https://wetratxyz-default-rtdb.firebaseio.com",
-            projectId: "wetratxyz",
-            storageBucket: "wetratxyz.firebasestorage.app",
-            messagingSenderId: "720006723992",
-            appId: "1:720006723992:web:b4cafbeb1d114438f313ed",
-            measurementId: "G-JKP9SW2FRV"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        const auth = firebase.auth();  // Initialize Firebase Authentication
-
-        // Show Admin Panel after login
-        function showAdminPanel() {
-            document.getElementById('admin-panel').style.display = 'block';
-            document.getElementById('login-panel').style.display = 'none';
-            document.getElementById('post-form').style.display = 'block';
-        }
-
-        // Login Function (Email/Password)
-        function login() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            auth.signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    showAdminPanel();
-                })
-                .catch((error) => {
-                    alert("Login failed: " + error.message);
-                });
-        }
-
-        // Logout Function
-        function logout() {
-            auth.signOut().then(() => {
-                document.getElementById('login-panel').style.display = 'block';
-                document.getElementById('admin-panel').style.display = 'none';
-            });
-        }
-
-        // Add Post
-        function addPost() {
-            const title = document.getElementById('title').value;
-            const content = document.getElementById('content').value;
-            const category = document.getElementById('category').value;
-            const tags = document.getElementById('tags').value;
-
-            if (!title || !content) {
-                alert('Title and content are required!');
-                return;
-            }
-
-            db.collection("posts").add({
-                title: title,
-                content: content,
-                category: category,
-                tags: tags,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-                alert("Post added successfully!");
-                loadPosts();  // Reload posts to show the new one
-            })
-            .catch(error => {
-                console.error("Error adding post: ", error);
-                alert('An error occurred while adding the post. Please try again.');
-            });
-        }
-
-        // Load Posts
-        function loadPosts() {
-            document.getElementById('posts').innerHTML = "";
-            db.collection("posts").orderBy("timestamp", "desc").get().then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    const postHtml = `
-                        <div class="post">
-                            <h2>${data.title}</h2>
-                            <p><strong>Category:</strong> ${data.category}</p>
-                            <p><strong>Tags:</strong> ${data.tags}</p>
-                            <p>${data.content}</p>
-                        </div>
-                    `;
-                    document.getElementById('posts').innerHTML += postHtml;
-                });
-            });
-        }
-
-        loadPosts();
-    </script>
-</body>
-</html>
+  );
+}
