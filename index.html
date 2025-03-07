@@ -1,68 +1,130 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Cheese, Rat } from "lucide-react";
-
-export default function RatsWebsite() {
-  const [cheeseCount, setCheeseCount] = useState(0);
-
-  useEffect(() => {
-    document.body.style.backgroundColor = "#FFEB3B"; // Cheese yellow background
-  }, []);
-
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center text-gray-900">
-      <motion.h1 
-        className="text-6xl font-bold mb-6" 
-        initial={{ opacity: 0, y: -20 }} 
-        animate={{ opacity: 1, y: 0 }}
-      >
-        🧀 Welcome to Rat Paradise! 🐀
-      </motion.h1>
-      
-      <motion.img 
-        src="https://i.imgur.com/4Z9YdDb.jpeg" 
-        alt="Wet Rat" 
-        className="w-64 h-64 rounded-full border-4 border-gray-800 shadow-lg" 
-        initial={{ scale: 0 }} 
-        animate={{ scale: 1 }} 
-        transition={{ duration: 0.5 }}
-      />
-
-      <p className="text-xl mt-4">We love rats. Especially wet ones. 🐁</p>
-
-      <motion.div 
-        className="mt-6"
-        initial={{ opacity: 0 }} 
-        animate={{ opacity: 1 }} 
-        transition={{ delay: 0.5 }}
-      >
-        <Button 
-          className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-xl shadow-lg"
-          onClick={() => setCheeseCount(cheeseCount + 1)}
-        >
-          <Cheese size={20} /> Give Cheese ({cheeseCount})
-        </Button>
-      </motion.div>
-
-      <motion.div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="p-4 bg-white shadow-lg">
-          <CardContent className="flex flex-col items-center">
-            <Rat size={50} className="text-gray-700" />
-            <h2 className="text-2xl font-semibold mt-2">Rats Are Smart</h2>
-            <p className="text-gray-600">They can solve puzzles and even laugh when tickled!</p>
-          </CardContent>
-        </Card>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Blog</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        .post {
+            background: #1e1e1e;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        .admin-panel {
+            display: none;
+            background: #333;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: #222;
+            color: white;
+            border: 1px solid #444;
+            border-radius: 5px;
+        }
+        button {
+            background: #6200ea;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #3700b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>News & Blog</h1>
+    <div id="posts"></div>
+    
+    <button onclick="showAdminPanel()">Admin Login</button>
+    
+    <div class="admin-panel" id="admin-panel">
+        <h2>Admin Panel</h2>
+        <input type="password" id="password" placeholder="Enter Password">
+        <button onclick="checkPassword()">Login</button>
         
-        <Card className="p-4 bg-white shadow-lg">
-          <CardContent className="flex flex-col items-center">
-            <Cheese size={50} className="text-yellow-500" />
-            <h2 className="text-2xl font-semibold mt-2">Rats Love Cheese</h2>
-            <p className="text-gray-600">But they actually prefer peanut butter. Sneaky little guys.</p>
-          </CardContent>
-        </Card>
-      </motion.div>
+        <div id="post-form" style="display:none;">
+            <h3>Add New Post</h3>
+            <input type="text" id="title" placeholder="Post Title">
+            <textarea id="content" placeholder="Post Content"></textarea>
+            <input type="text" id="category" placeholder="Category">
+            <input type="text" id="tags" placeholder="Tags (comma separated)">
+            <input type="file" id="image">
+            <button onclick="addPost()">Publish</button>
+        </div>
     </div>
-  );
-}
+
+    <script>
+        let storedPassword = "1234";
+
+        function showAdminPanel() {
+            document.getElementById('admin-panel').style.display = 'block';
+        }
+
+        function checkPassword() {
+            let inputPass = document.getElementById('password').value;
+            if (inputPass === storedPassword) {
+                document.getElementById('post-form').style.display = 'block';
+            } else {
+                alert('Incorrect password');
+            }
+        }
+
+        function addPost() {
+            let title = document.getElementById('title').value;
+            let content = document.getElementById('content').value;
+            let category = document.getElementById('category').value;
+            let tags = document.getElementById('tags').value;
+            let image = document.getElementById('image').files[0];
+
+            if (!title || !content) {
+                alert('Title and content are required!');
+                return;
+            }
+
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                let postHtml = `<div class='post'>
+                                    <h2>${title}</h2>
+                                    <p><strong>Category:</strong> ${category}</p>
+                                    <p><strong>Tags:</strong> ${tags}</p>
+                                    <img src='${e.target.result}' alt='Post Image'>
+                                    <p>${content}</p>
+                                </div>`;
+                document.getElementById('posts').innerHTML += postHtml;
+            };
+            if (image) {
+                reader.readAsDataURL(image);
+            } else {
+                let postHtml = `<div class='post'>
+                                    <h2>${title}</h2>
+                                    <p><strong>Category:</strong> ${category}</p>
+                                    <p><strong>Tags:</strong> ${tags}</p>
+                                    <p>${content}</p>
+                                </div>`;
+                document.getElementById('posts').innerHTML += postHtml;
+            }
+        }
+    </script>
+</body>
+</html>
