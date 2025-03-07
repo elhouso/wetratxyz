@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News & Blog</title>
     <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"></script>
     <style>
         body {
@@ -57,14 +58,20 @@
 <body>
     <h1>News & Blog</h1>
     <div id="posts"></div>
-    
-    <button onclick="showAdminPanel()">Admin Login</button>
-    
-    <div class="admin-panel" id="admin-panel">
-        <h2>Admin Panel</h2>
+
+    <!-- Login Form -->
+    <div id="login-panel">
+        <h2>Login</h2>
+        <input type="email" id="email" placeholder="Enter Email">
         <input type="password" id="password" placeholder="Enter Password">
-        <button onclick="checkPassword()">Login</button>
-        
+        <button onclick="login()">Login</button>
+    </div>
+
+    <!-- Admin Panel (Only visible after login) -->
+    <div class="admin-panel" id="admin-panel" style="display:none;">
+        <h2>Admin Panel</h2>
+        <button onclick="logout()">Logout</button>
+
         <div id="post-form" style="display:none;">
             <h3>Add New Post</h3>
             <input type="text" id="title" placeholder="Post Title">
@@ -86,23 +93,41 @@
             appId: "1:720006723992:web:b4cafbeb1d114438f313ed",
             measurementId: "G-JKP9SW2FRV"
         };
-        
+
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
+        const auth = firebase.auth();  // Initialize Firebase Authentication
 
+        // Show Admin Panel after login
         function showAdminPanel() {
             document.getElementById('admin-panel').style.display = 'block';
+            document.getElementById('login-panel').style.display = 'none';
+            document.getElementById('post-form').style.display = 'block';
         }
 
-        function checkPassword() {
-            const inputPass = document.getElementById('password').value;
-            if (inputPass === "1234") {
-                document.getElementById('post-form').style.display = 'block';
-            } else {
-                alert('Incorrect password');
-            }
+        // Login Function (Email/Password)
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    showAdminPanel();
+                })
+                .catch((error) => {
+                    alert("Login failed: " + error.message);
+                });
         }
 
+        // Logout Function
+        function logout() {
+            auth.signOut().then(() => {
+                document.getElementById('login-panel').style.display = 'block';
+                document.getElementById('admin-panel').style.display = 'none';
+            });
+        }
+
+        // Add Post
         function addPost() {
             const title = document.getElementById('title').value;
             const content = document.getElementById('content').value;
@@ -120,14 +145,18 @@
                 category: category,
                 tags: tags,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            }).then(() => {
+            })
+            .then(() => {
                 alert("Post added successfully!");
-                loadPosts();
-            }).catch(error => {
+                loadPosts();  // Reload posts to show the new one
+            })
+            .catch(error => {
                 console.error("Error adding post: ", error);
+                alert('An error occurred while adding the post. Please try again.');
             });
         }
 
+        // Load Posts
         function loadPosts() {
             document.getElementById('posts').innerHTML = "";
             db.collection("posts").orderBy("timestamp", "desc").get().then((querySnapshot) => {
