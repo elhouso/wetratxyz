@@ -1,8 +1,20 @@
+/* Animated Gradient Background */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 /* Smooth gradient background */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    
+    /* Moving gradient */
     background: linear-gradient(135deg, #ffdde1, #ee9ca7, #90caf9);
+    background-size: 300% 300%;
+    animation: gradientMove 10s ease infinite;
+    
     height: 100vh;
     display: flex;
     flex-direction: column;
