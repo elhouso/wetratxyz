@@ -85,6 +85,16 @@ nav a:hover {
     text-decoration: none;
 }
 
+/* Rounded Boxes */
+.rounded-box {
+    background-color: #1e1e1e; /* Dark gray */
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
 /* About Section */
 .about {
     text-align: center;
