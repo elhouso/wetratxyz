@@ -13,11 +13,16 @@ header {
     align-items: center;
     padding: 20px;
     background-color: #333;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .logo {
     font-size: 24px;
     font-weight: bold;
+    color: var(--accent-color);
+    animation: fadeIn 1s ease-in-out;
 }
 
 nav ul {
@@ -29,11 +34,12 @@ nav ul {
 nav a {
     text-decoration: none;
     color: #fff;
-    transition: color 0.3s;
+    transition: color 0.3s, transform 0.3s;
 }
 
 nav a:hover {
-    color: #ff6f61;
+    color: var(--accent-color);
+    transform: translateY(-3px);
 }
 
 /* Hero Section (Homepage) */
@@ -41,30 +47,34 @@ nav a:hover {
     text-align: center;
     padding: 100px 20px;
     background-color: #444;
+    animation: slideIn 1s ease-in-out;
 }
 
 .hero h1 {
     font-size: 48px;
     margin-bottom: 20px;
+    animation: fadeIn 2s ease-in-out;
 }
 
 .hero p {
     font-size: 18px;
     margin-bottom: 40px;
+    animation: fadeIn 2.5s ease-in-out;
 }
 
 .hero button {
     padding: 10px 20px;
     font-size: 16px;
     color: #fff;
-    background-color: #ff6f61;
+    background-color: var(--accent-color);
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .hero button:hover {
     background-color: #e65a50;
+    transform: scale(1.1);
 }
 
 /* General Content Styles (Used in Discord, Helpdesk, Status Pages) */
@@ -72,6 +82,7 @@ nav a:hover {
     text-align: center;
     padding: 100px 20px;
     background-color: #444;
+    animation: fadeIn 1s ease-in-out;
 }
 
 .content h1 {
@@ -89,15 +100,16 @@ nav a:hover {
     padding: 10px 20px;
     font-size: 16px;
     color: #fff;
-    background-color: #7289DA; /* Discord's brand color */
+    background-color: #7289DA;
     border: none;
     text-decoration: none;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .discord-button:hover {
     background-color: #5a6da3;
+    transform: scale(1.1);
 }
 
 /* Helpdesk Buttons */
@@ -111,15 +123,16 @@ nav a:hover {
     padding: 10px 20px;
     font-size: 16px;
     color: #fff;
-    background-color: #ff6f61;
+    background-color: var(--accent-color);
     border: none;
     text-decoration: none;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .help-button:hover {
     background-color: #e65a50;
+    transform: scale(1.1);
 }
 
 /* Status Page Styles */
@@ -128,6 +141,7 @@ nav a:hover {
     padding: 20px;
     border-radius: 10px;
     display: inline-block;
+    animation: fadeIn 1s ease-in-out;
 }
 
 .status-item {
@@ -143,7 +157,7 @@ nav a:hover {
 }
 
 .status-icon.green {
-    background-color: #4CAF50; /* Green for operational status */
+    background-color: #4CAF50;
 }
 
 /* Footer Styles */
@@ -151,4 +165,26 @@ footer {
     text-align: center;
     padding: 20px;
     background-color: #333;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
