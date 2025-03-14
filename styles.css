@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     color: #fff;
-    background-color: #1a1a1a;
+    background-color: #0a192f; /* Navy blue background */
 }
 
 header {
@@ -12,7 +12,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #333;
+    background-color: #162447; /* Darker navy blue */
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -46,7 +46,7 @@ nav a:hover {
 .hero {
     text-align: center;
     padding: 100px 20px;
-    background-color: #444;
+    background-color: #1f4068; /* Medium navy blue */
     animation: slideIn 1s ease-in-out;
 }
 
@@ -77,11 +77,43 @@ nav a:hover {
     transform: scale(1.1);
 }
 
+/* Text Boxes */
+.text-boxes {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 20px;
+    background-color: #0a192f; /* Navy blue background */
+}
+
+.text-box {
+    background-color: #1f4068; /* Medium navy blue */
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.text-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.text-box h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.text-box p {
+    font-size: 16px;
+    color: #c0c0c0;
+}
+
 /* General Content Styles (Used in Discord, Helpdesk, Status Pages) */
 .content {
     text-align: center;
     padding: 100px 20px;
-    background-color: #444;
+    background-color: #1f4068; /* Medium navy blue */
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -137,7 +169,7 @@ nav a:hover {
 
 /* Status Page Styles */
 .status-container {
-    background-color: #333;
+    background-color: #162447; /* Darker navy blue */
     padding: 20px;
     border-radius: 10px;
     display: inline-block;
@@ -164,7 +196,7 @@ nav a:hover {
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #333;
+    background-color: #162447; /* Darker navy blue */
     animation: fadeIn 1s ease-in-out;
 }
 
