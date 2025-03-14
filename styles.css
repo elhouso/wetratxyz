@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
@@ -35,6 +36,7 @@ nav a:hover {
     color: #ff6f61;
 }
 
+/* Hero Section (Homepage) */
 .hero {
     text-align: center;
     padding: 100px 20px;
@@ -65,6 +67,86 @@ nav a:hover {
     background-color: #e65a50;
 }
 
+/* General Content Styles (Used in Discord, Helpdesk, Status Pages) */
+.content {
+    text-align: center;
+    padding: 100px 20px;
+    background-color: #444;
+}
+
+.content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.content p {
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+/* Discord Button */
+.discord-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #7289DA; /* Discord's brand color */
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.discord-button:hover {
+    background-color: #5a6da3;
+}
+
+/* Helpdesk Buttons */
+.help-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.help-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #ff6f61;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.help-button:hover {
+    background-color: #e65a50;
+}
+
+/* Status Page Styles */
+.status-container {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-icon {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.status-icon.green {
+    background-color: #4CAF50; /* Green for operational status */
+}
+
+/* Footer Styles */
 footer {
     text-align: center;
     padding: 20px;
