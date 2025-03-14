@@ -109,87 +109,38 @@ nav a:hover {
     color: #c0c0c0;
 }
 
-/* General Content Styles (Used in Discord, Helpdesk, Status Pages) */
-.content {
-    text-align: center;
-    padding: 100px 20px;
+/* Cookies Popup */
+.cookies-popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
     background-color: #1f4068; /* Medium navy blue */
-    animation: fadeIn 1s ease-in-out;
-}
-
-.content h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
-}
-
-.content p {
-    font-size: 18px;
-    margin-bottom: 40px;
-}
-
-/* Discord Button */
-.discord-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #7289DA;
-    border: none;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.discord-button:hover {
-    background-color: #5a6da3;
-    transform: scale(1.1);
-}
-
-/* Helpdesk Buttons */
-.help-options {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.help-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: var(--accent-color);
-    border: none;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.help-button:hover {
-    background-color: #e65a50;
-    transform: scale(1.1);
-}
-
-/* Status Page Styles */
-.status-container {
-    background-color: #162447; /* Darker navy blue */
-    padding: 20px;
+    padding: 15px;
     border-radius: 10px;
-    display: inline-block;
-    animation: fadeIn 1s ease-in-out;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.5s ease-in-out;
+    z-index: 1000;
 }
 
-.status-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.cookies-popup p {
+    margin: 0;
+    font-size: 14px;
+    color: #c0c0c0;
 }
 
-.status-icon {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
+.cookies-popup button {
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
 }
 
-.status-icon.green {
-    background-color: #4CAF50;
+.cookies-popup button:hover {
+    background-color: #e65a50;
 }
 
 /* Footer Styles */
