@@ -47,58 +47,24 @@ nav a:hover {
     filter: drop-shadow(0 0 10px rgba(124, 77, 255, 0.5)); /* Bloom effect */
 }
 
-/* Rounded Boxes */
-.rounded-box {
-    background-color: #1e1e1e; /* Dark gray */
-    padding: 20px;
-    border-radius: 10px;
-    margin: 20px auto;
-    max-width: 800px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* Pricing Page */
-.pricing-cards {
-    display: flex;
-    justify-content: space-around;
-}
-
-.pricing-card {
-    background-color: #1e1e1e; /* Dark gray */
-    padding: 20px;
-    border-radius: 10px;
-    width: 30%;
+/* Hero Section (Homepage) */
+.hero {
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 100px 20px;
+    background-color: #1e1e1e; /* Dark gray */
+    animation: slideIn 1s ease-in-out;
 }
 
-.pricing-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-}
-
-.pricing-card h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.pricing-card .price {
-    font-size: 32px;
-    font-weight: bold;
-    color: #7c4dff; /* Deep purple accent */
+.hero h1 {
+    font-size: 48px;
     margin-bottom: 20px;
-    filter: drop-shadow(0 0 10px rgba(124, 77, 255, 0.5)); /* Bloom effect */
+    animation: fadeIn 2s ease-in-out;
 }
 
-.pricing-card ul {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 20px;
-}
-
-.pricing-card ul li {
-    font-size: 16px;
-    margin-bottom: 10px;
+.hero p {
+    font-size: 18px;
+    margin-bottom: 40px;
+    animation: fadeIn 2.5s ease-in-out;
 }
 
 .button-box {
@@ -115,39 +81,82 @@ nav a:hover {
     box-shadow: 0 5px 15px rgba(124, 77, 255, 0.3);
 }
 
-.pricing-button, .help-button {
+.discord-button, .help-button {
     padding: 10px 20px;
     font-size: 16px;
-    color: #fff;
+    color: #fff; /* White text */
     background-color: transparent;
     border: none;
     cursor: pointer;
     text-decoration: none;
 }
 
-/* Status Page */
-.status-container {
+/* Rounded Boxes */
+.rounded-box {
     background-color: #1e1e1e; /* Dark gray */
     padding: 20px;
     border-radius: 10px;
-    display: inline-block;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.status-item {
+/* About Section */
+.about {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #121212; /* Dark black background */
+}
+
+.about h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.about p {
+    font-size: 18px;
+    color: #c0c0c0;
+}
+
+/* Features Section */
+.features {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #1e1e1e; /* Dark gray */
+}
+
+.features h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.feature-boxes {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    justify-content: space-around;
 }
 
-.status-icon {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
+.feature-box {
+    background-color: #121212; /* Dark black background */
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.status-icon.green {
-    background-color: #4CAF50; /* Green for operational status */
-    filter: drop-shadow(0 0 10px rgba(76, 175, 80, 0.5)); /* Bloom effect */
+.feature-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.feature-box h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.feature-box p {
+    font-size: 16px;
+    color: #c0c0c0;
 }
 
 /* Footer Styles */
