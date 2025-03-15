@@ -23,6 +23,7 @@ header {
     font-weight: bold;
     color: #7c4dff; /* Deep purple accent */
     animation: fadeIn 1s ease-in-out;
+    filter: drop-shadow(0 0 10px rgba(124, 77, 255, 0.5)); /* Bloom effect */
 }
 
 nav ul {
@@ -40,6 +41,7 @@ nav a {
 nav a:hover {
     color: #7c4dff; /* Deep purple accent */
     transform: translateY(-3px);
+    filter: drop-shadow(0 0 10px rgba(124, 77, 255, 0.5)); /* Bloom effect */
 }
 
 /* Hero Section (Homepage) */
@@ -68,6 +70,7 @@ nav a:hover {
     border-radius: 10px;
     display: inline-block;
     transition: transform 0.3s, box-shadow 0.3s;
+    filter: drop-shadow(0 0 10px rgba(124, 77, 255, 0.5)); /* Bloom effect */
 }
 
 .button-box:hover {
@@ -95,42 +98,25 @@ nav a:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* About Section */
-.about {
+/* Pricing Section */
+.pricing {
     text-align: center;
     padding: 50px 20px;
     background-color: #121212; /* Dark black background */
 }
 
-.about h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-.about p {
-    font-size: 18px;
-    color: #c0c0c0;
-}
-
-/* Features Section */
-.features {
-    text-align: center;
-    padding: 50px 20px;
-    background-color: #1e1e1e; /* Dark gray */
-}
-
-.features h2 {
+.pricing h1 {
     font-size: 36px;
     margin-bottom: 40px;
 }
 
-.feature-boxes {
+.pricing-cards {
     display: flex;
     justify-content: space-around;
 }
 
-.feature-box {
-    background-color: #121212; /* Dark black background */
+.pricing-card {
+    background-color: #1e1e1e; /* Dark gray */
     padding: 20px;
     border-radius: 10px;
     width: 30%;
@@ -138,61 +124,49 @@ nav a:hover {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.feature-box:hover {
+.pricing-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-.feature-box h3 {
+.pricing-card h2 {
     font-size: 24px;
     margin-bottom: 10px;
 }
 
-.feature-box p {
-    font-size: 16px;
-    color: #c0c0c0;
-}
-
-/* Testimonials Section */
-.testimonials {
-    text-align: center;
-    padding: 50px 20px;
-    background-color: #121212; /* Dark black background */
-}
-
-.testimonials h2 {
-    font-size: 36px;
-    margin-bottom: 40px;
-}
-
-.testimonial-boxes {
-    display: flex;
-    justify-content: space-around;
-}
-
-.testimonial-box {
-    background-color: #1e1e1e; /* Dark gray */
-    padding: 20px;
-    border-radius: 10px;
-    width: 30%;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.testimonial-box:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-}
-
-.testimonial-box p {
-    font-size: 16px;
-    color: #c0c0c0;
-}
-
-.testimonial-box .author {
-    font-size: 14px;
+.pricing-card .price {
+    font-size: 32px;
+    font-weight: bold;
     color: #7c4dff; /* Deep purple accent */
-    margin-top: 10px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px rgba(124, 77, 255, 0.5)); /* Bloom effect */
+}
+
+.pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.pricing-card ul li {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.pricing-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #7c4dff; /* Deep purple accent */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    filter: drop-shadow(0 0 10px rgba(124, 77, 255, 0.5)); /* Bloom effect */
+}
+
+.pricing-button:hover {
+    background-color: #6a3dcc;
+    transform: scale(1.1);
 }
 
 /* Footer Styles */
