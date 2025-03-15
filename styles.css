@@ -81,7 +81,7 @@ nav a:hover {
     box-shadow: 0 5px 15px rgba(124, 77, 255, 0.3);
 }
 
-.discord-button {
+.discord-button, .help-button, .pricing-button {
     padding: 10px 20px;
     font-size: 16px;
     color: #fff; /* White text */
@@ -159,31 +159,20 @@ nav a:hover {
     color: #c0c0c0;
 }
 
-/* Footer Styles */
-footer {
-    text-align: center;
-    padding: 20px;
+/* Status Page */
+.status-container {
     background-color: #1e1e1e; /* Dark gray */
-    animation: fadeIn 1s ease-in-out;
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
 }
 
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-@keyframes slideIn {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
+.status-icon {
+    width: 15px;
+    height: 
