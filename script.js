@@ -1,3 +1,8 @@
-// Generate a random accent color (optional)
-const accentColor = `hsl(${Math.floor(Math.random() * 360)}, 70%, 50%)`;
-document.documentElement.style.setProperty('--accent-color', accentColor);
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".fade-in").forEach((el, index) => {
+        setTimeout(() => {
+            el.style.animationDelay = `${index * 0.3}s`;
+            el.classList.add("fade-in");
+        }, 100);
+    });
+});
