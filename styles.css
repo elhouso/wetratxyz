@@ -1,214 +1,32 @@
-/* General Styles */
-body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #fff;
-    background-color: #121212; /* Dark black background */
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #1e1e1e; /* Dark gray */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #7c4dff; /* Deep purple accent */
-    animation: fadeIn 1s ease-in-out;
-    filter: drop-shadow(0 0 10px rgba(124, 77, 255, 0.5)); /* Bloom effect */
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #fff;
-    transition: color 0.3s, transform 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-nav a:hover {
-    color: #7c4dff; /* Deep purple accent */
-    transform: translateY(-3px);
-    filter: drop-shadow(0 0 10px rgba(124, 77, 255, 0.5)); /* Bloom effect */
-}
-
-/* Hero Section (Homepage) */
-.hero {
-    text-align: center;
-    padding: 150px 20px; /* Increased padding for larger text */
-    background-color: #1e1e1e; /* Dark gray */
-    animation: slideIn 1s ease-in-out;
-}
-
-.hero h1 {
-    font-size: 64px; /* Larger text */
-    margin-bottom: 20px;
-    animation: fadeIn 2s ease-in-out;
-}
-
-.hero p {
-    font-size: 24px; /* Larger text */
-    margin-bottom: 40px;
-    animation: fadeIn 2.5s ease-in-out;
-}
-
-.button-box {
-    background-color: #7c4dff; /* Deep purple accent */
-    padding: 10px;
-    border-radius: 10px;
-    display: inline-block;
-    transition: transform 0.3s, box-shadow 0.3s;
-    filter: drop-shadow(0 0 10px rgba(124, 77, 255, 0.5)); /* Bloom effect */
-}
-
-.button-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(124, 77, 255, 0.3);
-}
-
-.discord-button, .help-button, .pricing-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff; /* White text */
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-/* Rounded Boxes */
-.rounded-box {
-    background-color: #1e1e1e; /* Dark gray */
-    padding: 20px;
-    border-radius: 10px;
-    margin: 20px auto;
-    max-width: 800px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* About Section */
-.about {
-    text-align: center;
-    padding: 50px 20px;
-    background-color: #121212; /* Dark black background */
-}
-
-.about h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-.about p {
-    font-size: 18px;
-    color: #c0c0c0;
-}
-
-/* Features Section */
-.features {
-    text-align: center;
-    padding: 50px 20px;
-    background-color: #1e1e1e; /* Dark gray */
-}
-
-.features h2 {
-    font-size: 36px;
-    margin-bottom: 40px;
-}
-
-.feature-boxes {
-    display: flex;
-    justify-content: space-around;
-}
-
-.feature-box {
-    background-color: #121212; /* Dark black background */
-    padding: 20px;
-    border-radius: 10px;
-    width: 30%;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.feature-box:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-}
-
-.feature-box h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.feature-box p {
-    font-size: 16px;
-    color: #c0c0c0;
-}
-
-/* Status Page */
-.status-container {
-    background-color: #1e1e1e; /* Dark gray */
-    padding: 20px;
-    border-radius: 10px;
-    display: inline-block;
-}
-
-.status-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.status-icon {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-}
-
-.status-icon.green {
-    background-color: #4CAF50; /* Green for operational status */
-    filter: drop-shadow(0 0 10px rgba(76, 175, 80, 0.5)); /* Bloom effect */
-}
-
-/* Footer Styles */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #1e1e1e; /* Dark gray */
-    animation: fadeIn 1s ease-in-out;
-}
-
-/* Animations */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes slideIn {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+.container {
+    max-width: 600px;
+    text-align: center;
+}
+
+.box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 255, 0.4);  /* Bloom effect with blue tint */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0, 0, 255, 0.6);  /* Intense bloom effect on hover */
+}
+
+h1 {
+    text-shadow: 0 0 10px rgba(0, 0, 255, 0.6);  /* Blue glow effect for name */
 }
