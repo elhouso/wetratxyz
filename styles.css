@@ -9,8 +9,9 @@
 }
 
 .container {
-    max-width: 600px;
+    max-width: 800px;
     text-align: center;
+    padding: 20px;
 }
 
 .box {
@@ -18,15 +19,27 @@
     padding: 20px;
     border-radius: 12px;
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 12px rgba(0, 0, 255, 0.4);  /* Bloom effect with blue tint */
+    box-shadow: 0 4px 12px rgba(0, 0, 255, 0.4);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .box:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 24px rgba(0, 0, 255, 0.6);  /* Intense bloom effect on hover */
+    box-shadow: 0 8px 24px rgba(0, 0, 255, 0.6);
 }
 
 h1 {
-    text-shadow: 0 0 10px rgba(0, 0, 255, 0.6);  /* Blue glow effect for name */
+    text-shadow: 0 0 10px rgba(0, 0, 255, 0.6);
+}
+
+nav a {
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+    color: #63b3ed;
+    background-color: rgba(0, 0, 255, 0.1);
 }
