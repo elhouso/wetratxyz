@@ -45,6 +45,33 @@
       animation: float 20s infinite ease-in-out;
     }
     
+    .blob:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      background: var(--accent-color);
+      top: 20%;
+      left: 30%;
+      animation-delay: 0s;
+    }
+    
+    .blob:nth-child(2) {
+      width: 250px;
+      height: 250px;
+      background: #f356ff;
+      top: 60%;
+      left: 60%;
+      animation-delay: -5s;
+    }
+    
+    .blob:nth-child(3) {
+      width: 350px;
+      height: 350px;
+      background: #ff5e5e;
+      bottom: 10%;
+      left: 10%;
+      animation-delay: -10s;
+    }
+    
     @keyframes float {
       0%, 100% {
         transform: translate(0, 0) scale(1);
@@ -82,6 +109,24 @@
       display: inline-block;
     }
     
+    .logo::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--accent-color);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease-out;
+    }
+    
+    .logo:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    
     nav ul {
       display: flex;
       list-style: none;
@@ -98,6 +143,24 @@
     
     nav a:hover {
       color: var(--accent-color);
+    }
+    
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--accent-color);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease-out;
+    }
+    
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
     }
     
     section {
@@ -126,6 +189,16 @@
       display: inline-block;
     }
     
+    h2::after {
+      content: "";
+      position: absolute;
+      width: 50%;
+      height: 4px;
+      bottom: -10px;
+      left: 0;
+      background-color: var(--accent-color);
+    }
+    
     p {
       font-size: 1.1rem;
       line-height: 1.7;
@@ -147,8 +220,24 @@
       z-index: 1;
     }
     
-    .btn:hover {
-      background-color: darken(var(--accent-color), 10%);
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+    
+    .btn:hover::before {
+      left: 0;
+    }
+    
+    .highlight {
+      color: var(--accent-color);
     }
     
     .hero {
@@ -165,6 +254,20 @@
       margin-top: 2rem;
     }
     
+    .skill {
+      background-color: var(--card-bg);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .skill:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 20px var(--accent-color);
+    }
+    
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -172,11 +275,154 @@
       margin-top: 2rem;
     }
     
+    .project-card {
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px var(--accent-color);
+    }
+    
+    .project-image {
+      width: 100%;
+      height: 180px;
+      background-color: rgba(53, 152, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .project-card:hover .project-image img {
+      transform: scale(1.1);
+    }
+    
+    .project-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .project-description {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+    
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+    
+    .project-tag {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      background-color: rgba(53, 152, 255, 0.2);
+      border-radius: 4px;
+      color: var(--accent-color);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    input, textarea {
+      width: 100%;
+      padding: 0.8rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      color: var(--text-color);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 2px rgba(53, 152, 255, 0.2);
+    }
+    
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
     footer {
       text-align: center;
       padding: 2rem 0;
       margin-top: 5rem;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .social-link {
+      color: var(--text-color);
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+    
+    .social-link:hover {
+      color: var(--accent-color);
+    }
+    
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      nav ul {
+        gap: 1rem;
+      }
+      
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+      
+      .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      }
     }
   </style>
 </head>
@@ -195,32 +441,228 @@
           <li><a href="#home">Home</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
+          <li><a href="#">Placeholder</a></li>
         </ul>
       </nav>
     </header>
 
     <section id="home" class="hero">
       <h1>Hi, I'm <span class="highlight">Your Name</span></h1>
-      <p>I'm a passionate developer focused on creating modern and intuitive web experiences.</p>
+      <p>I'm a passionate developer focused on creating modern and intuitive web experiences. With expertise in multiple programming languages and frameworks, I bring ideas to life through code.</p>
+      <a href="#" class="btn">Get in touch</a>
     </section>
 
     <section id="skills">
       <h2>My Skills</h2>
       <div class="skills-container">
-        <!-- Skills will go here -->
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">Discord.py</div>
+        <div class="skill">Python</div>
+        <div class="skill">React</div>
+        <div class="skill">Node.js</div>
+        <div class="skill">Git</div>
+        <div class="skill">Responsive Design</div>
       </div>
     </section>
 
     <section id="projects">
-      <h2>Projects</h2>
+      <h2>Featured Projects</h2>
       <div class="projects-grid">
-        <!-- Project items go here -->
+        <!-- Project 1 -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="/api/placeholder/400/320" alt="Project 1">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Project One</h3>
+            <p class="project-description">A short description of this project. Edit this text with details about your work.</p>
+            <div class="project-tags">
+              <span class="project-tag">HTML</span>
+              <span class="project-tag">CSS</span>
+              <span class="project-tag">JavaScript</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="/api/placeholder/400/320" alt="Project 2">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Project Two</h3>
+            <p class="project-description">A short description of this project. Edit this text with details about your work.</p>
+            <div class="project-tags">
+              <span class="project-tag">React</span>
+              <span class="project-tag">Node.js</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="/api/placeholder/400/320" alt="Project 3">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Project Three</h3>
+            <p class="project-description">A short description of this project. Edit this text with details about your work.</p>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Discord.py</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="/api/placeholder/400/320" alt="Project 4">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Project Four</h3>
+            <p class="project-description">A short description of this project. Edit this text with details about your work.</p>
+            <div class="project-tags">
+              <span class="project-tag">HTML</span>
+              <span class="project-tag">CSS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="/api/placeholder/400/320" alt="Project 5">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Project Five</h3>
+            <p class="project-description">A short description of this project. Edit this text with details about your work.</p>
+            <div class="project-tags">
+              <span class="project-tag">JavaScript</span>
+              <span class="project-tag">API</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="/api/placeholder/400/320" alt="Project 6">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Project Six</h3>
+            <p class="project-description">A short description of this project. Edit this text with details about your work.</p>
+            <div class="project-tags">
+              <span class="project-tag">Node.js</span>
+              <span class="project-tag">Express</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 7 -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="/api/placeholder/400/320" alt="Project 7">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Project Seven</h3>
+            <p class="project-description">A short description of this project. Edit this text with details about your work.</p>
+            <div class="project-tags">
+              <span class="project-tag">React</span>
+              <span class="project-tag">Firebase</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 8 -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="/api/placeholder/400/320" alt="Project 8">
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Project Eight</h3>
+            <p class="project-description">A short description of this project. Edit this text with details about your work.</p>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Django</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
-  </div>
 
   <footer>
-    <p>&copy; 2025 Your Name. All rights reserved.</p>
+    <div class="container">
+      <div class="social-links">
+        <a href="#" class="social-link">GitHub</a>
+        <a href="#" class="social-link">LinkedIn</a>
+        <a href="#" class="social-link">Twitter</a>
+      </div>
+      <p>&copy; 2025 Your Name. All rights reserved.</p>
+    </div>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Smooth scrolling for navigation
+      const links = document.querySelectorAll('nav a');
+      
+      links.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          const targetId = link.getAttribute('href');
+          const targetSection = document.querySelector(targetId);
+          
+          window.scrollTo({
+            top: targetSection.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        });
+      });
+      
+      // Reveal sections on scroll
+      const revealSections = () => {
+        const sections = document.querySelectorAll('section');
+        
+        sections.forEach(section => {
+          const sectionTop = section.getBoundingClientRect().top;
+          const windowHeight = window.innerHeight;
+          
+          if (sectionTop < windowHeight * 0.8) {
+            section.classList.add('visible');
+          }
+        });
+      };
+      
+      // Initial check
+      revealSections();
+      
+      // Check on scroll
+      window.addEventListener('scroll', revealSections);
+      
+      // Move blobs randomly
+      const blobs = document.querySelectorAll('.blob');
+      
+      const moveBlobs = () => {
+        blobs.forEach((blob, index) => {
+          const speed = 0.05;
+          const time = Date.now() * speed;
+          const offset = index * 1000;
+          
+          const x = Math.sin(time + offset) * 10;
+          const y = Math.cos(time + offset) * 10;
+          
+          blob.style.transform = `translate(${x}px, ${y}px)`;
+        });
+        
+        requestAnimationFrame(moveBlobs);
+      };
+      
+      moveBlobs();
+    });
+  </script>
 </body>
 </html>
