@@ -1,670 +1,467 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Developer Portfolio</title>
-  <style>
-    :root {
-      --accent-color: #3498ff;
-      --background-color: #0a0a0a;
-      --card-bg: rgba(20, 20, 20, 0.7);
-      --text-color: #f5f5f5;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    
-    body {
-      background-color: var(--background-color);
-      color: var(--text-color);
-      overflow-x: hidden;
-      min-height: 100vh;
-    }
-    
-    .blob-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
-      filter: blur(80px) saturate(150%);
-      opacity: 0.5;
-    }
-    
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      mix-blend-mode: screen;
-      animation: float 20s infinite ease-in-out;
-    }
-    
-    .blob:nth-child(1) {
-      width: 300px;
-      height: 300px;
-      background: var(--accent-color);
-      top: 20%;
-      left: 30%;
-      animation-delay: 0s;
-    }
-    
-    .blob:nth-child(2) {
-      width: 250px;
-      height: 250px;
-      background: #f356ff;
-      top: 60%;
-      left: 60%;
-      animation-delay: -5s;
-    }
-    
-    .blob:nth-child(3) {
-      width: 350px;
-      height: 350px;
-      background: #ff5e5e;
-      bottom: 10%;
-      left: 10%;
-      animation-delay: -10s;
-    }
-    
-    @keyframes float {
-      0%, 100% {
-        transform: translate(0, 0) scale(1);
-      }
-      25% {
-        transform: translate(5%, 10%) scale(1.1);
-      }
-      50% {
-        transform: translate(10%, -5%) scale(0.9);
-      }
-      75% {
-        transform: translate(-10%, 5%) scale(1.05);
-      }
-    }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-    
-    header {
-      padding: 2rem 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: var(--text-color);
-      text-decoration: none;
-      position: relative;
-      display: inline-block;
-    }
-    
-    .logo::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      bottom: -4px;
-      left: 0;
-      background-color: var(--accent-color);
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.3s ease-out;
-    }
-    
-    .logo:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-    
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-    }
-    
-    nav a {
-      color: var(--text-color);
-      text-decoration: none;
-      font-weight: 500;
-      position: relative;
-      transition: color 0.3s ease;
-    }
-    
-    nav a:hover {
-      color: var(--accent-color);
-    }
-    
-    nav a::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      bottom: -4px;
-      left: 0;
-      background-color: var(--accent-color);
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.3s ease-out;
-    }
-    
-    nav a:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-    
-    section {
-      margin: 5rem 0;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      line-height: 1.2;
-      font-weight: 800;
-    }
-    
-    h2 {
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
-      position: relative;
-      display: inline-block;
-    }
-    
-    h2::after {
-      content: "";
-      position: absolute;
-      width: 50%;
-      height: 4px;
-      bottom: -10px;
-      left: 0;
-      background-color: var(--accent-color);
-    }
-    
-    p {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-      max-width: 600px;
-    }
-    
-    .btn {
-      display: inline-block;
-      padding: 0.8rem 2rem;
-      background-color: var(--accent-color);
-      color: white;
-      text-decoration: none;
-      border-radius: 4px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-    }
-    
-    .btn::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      transition: left 0.3s ease;
-      z-index: -1;
-    }
-    
-    .btn:hover::before {
-      left: 0;
-    }
-    
-    .highlight {
-      color: var(--accent-color);
-    }
-    
-    .hero {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 80vh;
-    }
-    
-    .skills-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    
-    .skill {
-      background-color: var(--card-bg);
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
-    }
-    
-    .skill:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 20px var(--accent-color);
-    }
-    
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    
-    .project-card {
-      background-color: var(--card-bg);
-      border-radius: 8px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .project-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px var(--accent-color);
-    }
-    
-    .project-image {
-      width: 100%;
-      height: 180px;
-      background-color: rgba(53, 152, 255, 0.2);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .project-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-    
-    .project-card:hover .project-image img {
-      transform: scale(1.1);
-    }
-    
-    .project-content {
-      padding: 1.5rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .project-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-    
-    .project-description {
-      font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 1rem;
-      flex-grow: 1;
-    }
-    
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: auto;
-    }
-    
-    .project-tag {
-      font-size: 0.7rem;
-      padding: 0.2rem 0.5rem;
-      background-color: rgba(53, 152, 255, 0.2);
-      border-radius: 4px;
-      color: var(--accent-color);
-    }
-    
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-    
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-    
-    input, textarea {
-      width: 100%;
-      padding: 0.8rem;
-      background-color: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
-      color: var(--text-color);
-      font-size: 1rem;
-      transition: all 0.3s ease;
-    }
-    
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: var(--accent-color);
-      box-shadow: 0 0 0 2px rgba(53, 152, 255, 0.2);
-    }
-    
-    textarea {
-      min-height: 150px;
-      resize: vertical;
-    }
-    
-    footer {
-      text-align: center;
-      padding: 2rem 0;
-      margin-top: 5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin: 1.5rem 0;
-    }
-    
-    .social-link {
-      color: var(--text-color);
-      font-size: 1.5rem;
-      transition: color 0.3s ease;
-    }
-    
-    .social-link:hover {
-      color: var(--accent-color);
-    }
-    
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      
-      nav ul {
-        gap: 1rem;
-      }
-      
-      h1 {
-        font-size: 2.5rem;
-      }
-      
-      h2 {
-        font-size: 2rem;
-      }
-      
-      .projects-grid {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anton Medvedev | Software Engineer</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-color: #4d6fff;
+            --secondary-bg: #1e1e1e;
+            --hover-color: #5d7fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .github-icon {
+            margin-left: 15px;
+        }
+        
+        .clock {
+            background-color: var(--secondary-bg);
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-left: 15px;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .intro {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+        }
+        
+        .bio {
+            max-width: 600px;
+        }
+        
+        h1 {
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .project-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .project-link:hover {
+            color: var(--hover-color);
+            text-decoration: underline;
+        }
+        
+        .links-section {
+            margin: 30px 0;
+        }
+        
+        .links-section h2 {
+            margin-bottom: 15px;
+        }
+        
+        .links-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .links-list a {
+            color: var(--accent-color);
+            text-decoration: none;
+            padding: 8px 16px;
+            background-color: var(--secondary-bg);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .links-list a:hover {
+            background-color: var(--accent-color);
+            color: #121212;
+        }
+        
+        .visual-section {
+            display: flex;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .game-container {
+            width: 100%;
+            max-width: 600px;
+            height: 200px;
+            background-color: var(--secondary-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .sky {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70%;
+            background-color: #4d6fff;
+        }
+        
+        .ground {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background-color: #2d3d3d;
+        }
+        
+        .tree {
+            position: absolute;
+            bottom: 30%;
+            width: 40px;
+            height: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: moveLeft 15s linear infinite;
+        }
+        
+        .tree-top {
+            width: 30px;
+            height: 40px;
+            background-color: #2e7d32;
+            border-radius: 50% 50% 10% 10%;
+        }
+        
+        .tree-trunk {
+            width: 8px;
+            height: 20px;
+            background-color: #5d4037;
+        }
+        
+        .character {
+            position: absolute;
+            bottom: 35%;
+            left: 100px;
+            width: 20px;
+            height: 30px;
+            background-color: #f44336;
+            border-radius: 5px;
+            animation: hover 2s ease-in-out infinite;
+        }
+        
+        .jetpack {
+            position: absolute;
+            top: 5px;
+            left: -10px;
+            width: 10px;
+            height: 15px;
+            background-color: #9e9e9e;
+            border-radius: 3px;
+        }
+        
+        .flame {
+            position: absolute;
+            top: 15px;
+            left: -5px;
+            width: 5px;
+            height: 10px;
+            background-color: #ff9800;
+            border-radius: 50%;
+            animation: flicker 0.5s alternate infinite;
+        }
+        
+        .map-container {
+            width: 100%;
+            max-width: 400px;
+            height: 200px;
+            background-color: var(--secondary-bg);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .map {
+            width: 100%;
+            height: 100%;
+            background-color: #242424;
+            position: relative;
+        }
+        
+        .location-marker {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 0 3px rgba(77, 111, 255, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        .map-road {
+            position: absolute;
+            background-color: #363636;
+            border-radius: 2px;
+        }
+        
+        .road-1 {
+            top: 30%;
+            left: 10%;
+            width: 80%;
+            height: 4px;
+        }
+        
+        .road-2 {
+            top: 20%;
+            left: 30%;
+            width: 4px;
+            height: 60%;
+        }
+        
+        .road-3 {
+            top: 60%;
+            left: 20%;
+            width: 50%;
+            height: 3px;
+        }
+        
+        .water {
+            position: absolute;
+            top: 10%;
+            right: 10%;
+            width: 30%;
+            height: 20%;
+            background-color: #263238;
+            border-radius: 50%;
+        }
+        
+        @keyframes moveLeft {
+            0% {
+                left: 120%;
+            }
+            100% {
+                left: -10%;
+            }
+        }
+        
+        @keyframes hover {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @keyframes flicker {
+            0% {
+                opacity: 0.7;
+                height: 8px;
+            }
+            100% {
+                opacity: 1;
+                height: 12px;
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(77, 111, 255, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(77, 111, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(77, 111, 255, 0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .intro {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .visual-section {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="blob-container">
-    <div class="blob"></div>
-    <div class="blob"></div>
-    <div class="blob"></div>
-  </div>
-
-  <div class="container">
-    <header>
-<a href="#" class="logo">
-  <img src="https://raw.githubusercontent.com/elhouso/wetratxyz/main/img/download%20(1).png" alt="Logo" style="height: 50px;">
-</a>
-      <nav>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#">Placeholder</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <section id="home" class="hero">
-      <h1>Hi, I'm <span class="highlight">Your Name</span></h1>
-      <p>I'm a passionate developer focused on creating modern and intuitive web experiences. With expertise in multiple programming languages and frameworks, I bring ideas to life through code.</p>
-      <a href="#" class="btn">Get in touch</a>
-    </section>
-
-    <section id="skills">
-      <h2>My Skills</h2>
-      <div class="skills-container">
-        <div class="skill">HTML</div>
-        <div class="skill">CSS</div>
-        <div class="skill">JavaScript</div>
-        <div class="skill">Discord.py</div>
-        <div class="skill">Python</div>
-        <div class="skill">React</div>
-        <div class="skill">Node.js</div>
-        <div class="skill">Git</div>
-        <div class="skill">Responsive Design</div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <h2>Featured Projects</h2>
-      <div class="projects-grid">
-        <!-- Project 1 -->
-        <div class="project-card">
-          <div class="project-image">
-            <img src="/api/placeholder/400/320" alt="Project 1">
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Project One</h3>
-            <p class="project-description">A short description of this project. Edit this text with details about your work.</p>
-            <div class="project-tags">
-              <span class="project-tag">HTML</span>
-              <span class="project-tag">CSS</span>
-              <span class="project-tag">JavaScript</span>
-            </div>
-          </div>
+    <nav>
+        <a href="#" class="logo">medv</a>
+        <div class="nav-links">
+            <a href="#">projects</a>
+            <a href="#">blog</a>
+            <a href="https://github.com/medvedev" class="github-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 0C5.37 0 0 5.37 0 12C0 17.31 3.435 21.795 8.205 23.385C8.805 23.49 9.03 23.13 9.03 22.815C9.03 22.53 9.015 21.585 9.015 20.58C6 21.135 5.22 19.845 4.98 19.17C4.845 18.825 4.26 17.76 3.75 17.475C3.33 17.25 2.73 16.695 3.735 16.68C4.68 16.665 5.355 17.55 5.58 17.91C6.66 19.725 8.385 19.215 9.075 18.9C9.18 18.12 9.495 17.595 9.84 17.295C7.17 16.995 4.38 15.96 4.38 11.37C4.38 10.065 4.845 8.985 5.61 8.145C5.49 7.845 5.07 6.615 5.73 4.965C5.73 4.965 6.735 4.65 9.03 6.195C9.99 5.925 11.01 5.79 12.03 5.79C13.05 5.79 14.07 5.925 15.03 6.195C17.325 4.635 18.33 4.965 18.33 4.965C18.99 6.615 18.57 7.845 18.45 8.145C19.215 8.985 19.68 10.05 19.68 11.37C19.68 15.975 16.875 16.995 14.205 17.295C14.64 17.67 15.015 18.39 15.015 19.515C15.015 21.12 15 22.41 15 22.815C15 23.13 15.225 23.505 15.825 23.385C18.2072 22.5807 20.2772 21.0497 21.7437 19.0074C23.2101 16.965 23.9993 14.5143 24 12C24 5.37 18.63 0 12 0Z" fill="#e0e0e0"/>
+                </svg>
+            </a>
+            <div class="clock" id="current-time">00:00</div>
         </div>
-
-        <!-- Project 2 -->
-        <div class="project-card">
-          <div class="project-image">
-            <img src="/api/placeholder/400/320" alt="Project 2">
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Project Two</h3>
-            <p class="project-description">A short description of this project. Edit this text with details about your work.</p>
-            <div class="project-tags">
-              <span class="project-tag">React</span>
-              <span class="project-tag">Node.js</span>
+    </nav>
+    
+    <div class="main-content">
+        <div class="intro">
+            <img src="/api/placeholder/150/150" alt="Anton Medvedev" class="profile-pic">
+            <div class="bio">
+                <h1>Anton Medvedev</h1>
+                <p>Hi, I'm a software engineer passionate about building tools that make developers' lives easier. With a focus on elegant solutions to complex problems, I enjoy creating software that is both powerful and intuitive.</p>
+                <p>I'm the creator of <a href="#" class="project-link">google/zx</a>, a tool for writing simple command-line scripts with JavaScript, and <a href="#" class="project-link">deployer</a>, a deployment tool for PHP applications. I've also developed <a href="#" class="project-link">expr-lang</a>, a lightweight expression language for Go.</p>
+                <p>Currently based in Zürich, I'm always open to discussing interesting projects and opportunities.</p>
             </div>
-          </div>
         </div>
-
-        <!-- Project 3 -->
-        <div class="project-card">
-          <div class="project-image">
-            <img src="/api/placeholder/400/320" alt="Project 3">
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Project Three</h3>
-            <p class="project-description">A short description of this project. Edit this text with details about your work.</p>
-            <div class="project-tags">
-              <span class="project-tag">Python</span>
-              <span class="project-tag">Discord.py</span>
+        
+        <div class="links-section">
+            <h2>Links</h2>
+            <div class="links-list">
+                <a href="mailto:email@example.com">Email</a>
+                <a href="https://github.com/medvedev">GitHub</a>
+                <a href="https://linkedin.com/in/medvedev">LinkedIn</a>
+                <a href="#">Wish List</a>
             </div>
-          </div>
         </div>
-
-        <!-- Project 4 -->
-        <div class="project-card">
-          <div class="project-image">
-            <img src="/api/placeholder/400/320" alt="Project 4">
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Project Four</h3>
-            <p class="project-description">A short description of this project. Edit this text with details about your work.</p>
-            <div class="project-tags">
-              <span class="project-tag">HTML</span>
-              <span class="project-tag">CSS</span>
+        
+        <div class="visual-section">
+            <div class="game-container">
+                <div class="sky"></div>
+                <div class="ground"></div>
+                <div class="tree" style="left: 20%">
+                    <div class="tree-top"></div>
+                    <div class="tree-trunk"></div>
+                </div>
+                <div class="tree" style="left: 50%">
+                    <div class="tree-top"></div>
+                    <div class="tree-trunk"></div>
+                </div>
+                <div class="tree" style="left: 80%">
+                    <div class="tree-top"></div>
+                    <div class="tree-trunk"></div>
+                </div>
+                <div class="character">
+                    <div class="jetpack"></div>
+                    <div class="flame"></div>
+                </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Project 5 -->
-        <div class="project-card">
-          <div class="project-image">
-            <img src="/api/placeholder/400/320" alt="Project 5">
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Project Five</h3>
-            <p class="project-description">A short description of this project. Edit this text with details about your work.</p>
-            <div class="project-tags">
-              <span class="project-tag">JavaScript</span>
-              <span class="project-tag">API</span>
+            
+            <div class="map-container">
+                <div class="map">
+                    <div class="map-road road-1"></div>
+                    <div class="map-road road-2"></div>
+                    <div class="map-road road-3"></div>
+                    <div class="water"></div>
+                    <div class="location-marker"></div>
+                </div>
             </div>
-          </div>
         </div>
-
-        <!-- Project 6 -->
-        <div class="project-card">
-          <div class="project-image">
-            <img src="/api/placeholder/400/320" alt="Project 6">
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Project Six</h3>
-            <p class="project-description">A short description of this project. Edit this text with details about your work.</p>
-            <div class="project-tags">
-              <span class="project-tag">Node.js</span>
-              <span class="project-tag">Express</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 7 -->
-        <div class="project-card">
-          <div class="project-image">
-            <img src="/api/placeholder/400/320" alt="Project 7">
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Project Seven</h3>
-            <p class="project-description">A short description of this project. Edit this text with details about your work.</p>
-            <div class="project-tags">
-              <span class="project-tag">React</span>
-              <span class="project-tag">Firebase</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 8 -->
-        <div class="project-card">
-          <div class="project-image">
-            <img src="/api/placeholder/400/320" alt="Project 8">
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Project Eight</h3>
-            <p class="project-description">A short description of this project. Edit this text with details about your work.</p>
-            <div class="project-tags">
-              <span class="project-tag">Python</span>
-              <span class="project-tag">Django</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  <footer>
-    <div class="container">
-      <div class="social-links">
-        <a href="#" class="social-link">GitHub</a>
-        <a href="#" class="social-link">LinkedIn</a>
-        <a href="#" class="social-link">Twitter</a>
-      </div>
-      <p>&copy; 2025 Your Name. All rights reserved.</p>
     </div>
-  </footer>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Smooth scrolling for navigation
-      const links = document.querySelectorAll('nav a');
-      
-      links.forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          
-          const targetId = link.getAttribute('href');
-          const targetSection = document.querySelector(targetId);
-          
-          window.scrollTo({
-            top: targetSection.offsetTop - 80,
-            behavior: 'smooth'
-          });
-        });
-      });
-      
-      // Reveal sections on scroll
-      const revealSections = () => {
-        const sections = document.querySelectorAll('section');
+    
+    <script>
+        // Update the clock
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('current-time').textContent = `${hours}:${minutes}`;
+        }
         
-        sections.forEach(section => {
-          const sectionTop = section.getBoundingClientRect().top;
-          const windowHeight = window.innerHeight;
-          
-          if (sectionTop < windowHeight * 0.8) {
-            section.classList.add('visible');
-          }
-        });
-      };
-      
-      // Initial check
-      revealSections();
-      
-      // Check on scroll
-      window.addEventListener('scroll', revealSections);
-      
-      // Move blobs randomly
-      const blobs = document.querySelectorAll('.blob');
-      
-      const moveBlobs = () => {
-        blobs.forEach((blob, index) => {
-          const speed = 0.05;
-          const time = Date.now() * speed;
-          const offset = index * 1000;
-          
-          const x = Math.sin(time + offset) * 10;
-          const y = Math.cos(time + offset) * 10;
-          
-          blob.style.transform = `translate(${x}px, ${y}px)`;
-        });
+        // Generate random trees
+        function generateTrees() {
+            const gameContainer = document.querySelector('.game-container');
+            const treeCount = 5;
+            
+            for (let i = 0; i < treeCount; i++) {
+                const tree = document.createElement('div');
+                tree.className = 'tree';
+                tree.style.left = `${Math.random() * 100 + 100}%`;
+                tree.style.animationDelay = `${Math.random() * 15}s`;
+                
+                const treeTop = document.createElement('div');
+                treeTop.className = 'tree-top';
+                
+                const treeTrunk = document.createElement('div');
+                treeTrunk.className = 'tree-trunk';
+                
+                tree.appendChild(treeTop);
+                tree.appendChild(treeTrunk);
+                gameContainer.appendChild(tree);
+            }
+        }
         
-        requestAnimationFrame(moveBlobs);
-      };
-      
-      moveBlobs();
-    });
-  </script>
+        // Initialize
+        updateClock();
+        setInterval(updateClock, 60000);
+        generateTrees();
+    </script>
 </body>
 </html>
