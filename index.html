@@ -1,302 +1,647 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modern Bloom Website</title>
-  <style>
-    :root {
-      --primary: #0062ff;
-      --secondary: #00a3ff;
-      --accent: #00d5ff;
-      --dark: #121212;
-      --darker: #080808;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    
-    body {
-      background-color: var(--darker);
-      color: white;
-      overflow-x: hidden;
-      min-height: 100vh;
-    }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-      position: relative;
-      z-index: 1;
-    }
-    
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    
-    h1 {
-      font-size: 4rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      line-height: 1.1;
-      background: linear-gradient(90deg, white, var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.8s forwards 0.2s;
-    }
-    
-    p {
-      font-size: 1.25rem;
-      line-height: 1.7;
-      max-width: 640px;
-      margin-bottom: 2rem;
-      opacity: 0.8;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.8s forwards 0.4s;
-    }
-    
-    .btn {
-      display: inline-block;
-      padding: 1rem 2rem;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 50px;
-      color: white;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.8s forwards 0.6s;
-    }
-    
-    .btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateY(-2px);
-    }
-    
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transform: translateX(-100%);
-    }
-    
-    .btn:hover::before {
-      animation: shimmer 1.5s infinite;
-    }
-    
-    .blob {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.5;
-      z-index: 0;
-      animation: float 15s infinite alternate ease-in-out;
-    }
-    
-    .blob-1 {
-      width: 500px;
-      height: 500px;
-      background: var(--primary);
-      top: -200px;
-      right: -100px;
-      animation-delay: 0s;
-    }
-    
-    .blob-2 {
-      width: 600px;
-      height: 600px;
-      background: var(--secondary);
-      bottom: -250px;
-      left: -200px;
-      animation-delay: -5s;
-    }
-    
-    .blob-3 {
-      width: 300px;
-      height: 300px;
-      background: var(--accent);
-      top: 50%;
-      right: 10%;
-      animation-delay: -10s;
-    }
-    
-    .card {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 2rem;
-      margin-top: 2rem;
-      transition: transform 0.3s;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeUp 0.8s forwards 0.8s;
-    }
-    
-    .card:hover {
-      transform: translateY(-5px);
-    }
-    
-    .card h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: var(--accent);
-    }
-    
-    .bloom {
-      position: absolute;
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background: var(--primary);
-      filter: blur(100px);
-      opacity: 0.3;
-      animation: pulse 5s infinite alternate;
-    }
-    
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    @keyframes float {
-      0% {
-        transform: translate(0, 0) scale(1);
-      }
-      50% {
-        transform: translate(30px, -30px) scale(1.05);
-      }
-      100% {
-        transform: translate(-30px, 30px) scale(0.95);
-      }
-    }
-    
-    @keyframes pulse {
-      0% {
-        opacity: 0.2;
-        transform: scale(0.95);
-      }
-      100% {
-        opacity: 0.4;
-        transform: scale(1.05);
-      }
-    }
-    
-    @keyframes shimmer {
-      0% {
-        transform: translateX(-100%);
-      }
-      100% {
-        transform: translateX(100%);
-      }
-    }
-    
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 1.5rem 2rem;
-      z-index: 10;
-      background: rgba(8, 8, 8, 0.5);
-      backdrop-filter: blur(10px);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .logo {
-      font-weight: 800;
-      font-size: 1.5rem;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .nav {
-      display: flex;
-      gap: 2rem;
-    }
-    
-    .nav a {
-      color: white;
-      text-decoration: none;
-      opacity: 0.7;
-      transition: all 0.3s;
-    }
-    
-    .nav a:hover {
-      opacity: 1;
-      color: var(--accent);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pp pants</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #2563eb;
+            --primary-lighter: #3b82f6;
+            --primary-lightest: #93c5fd;
+            --dark: #111827;
+            --darker: #030712;
+            --text: #e5e7eb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: var(--darker);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: 0;
+            animation: float 15s ease-in-out infinite;
+        }
+        
+        .blob-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--primary);
+            top: -300px;
+            left: -200px;
+            animation-delay: 0s;
+        }
+        
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--primary-light);
+            top: 50%;
+            right: -200px;
+            animation-delay: -3s;
+        }
+        
+        .blob-3 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary-lighter);
+            bottom: -200px;
+            left: 30%;
+            animation-delay: -7s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.05);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.95);
+            }
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+        }
+        
+        .logo {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+        
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--primary-lighter);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-lighter);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            padding: 6rem 0 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--text), var(--primary-lightest));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 1.75rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .glass-card {
+            background: rgba(30, 58, 138, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .about, .projects {
+            padding: 6rem 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-lighter);
+        }
+        
+        .main-project {
+            margin-bottom: 4rem;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .main-project-image {
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .main-project-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .main-project:hover .main-project-image img {
+            transform: scale(1.05);
+        }
+        
+        .main-project-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .main-project-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: rgba(37, 99, 235, 0.2);
+            color: var(--primary-lightest);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .other-projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+        
+        .project-card-image {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .project-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .project-card:hover .project-card-image img {
+            transform: scale(1.1);
+        }
+        
+        .project-card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(3, 7, 18, 0.95), transparent);
+        }
+        
+        .project-card-content h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-card-content p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .skills {
+            padding: 6rem 0;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .skill-card h3 {
+            margin: 1rem 0;
+        }
+        
+        .skill-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary-lighter);
+            margin-bottom: 1.5rem;
+        }
+        
+        footer {
+            padding: 3rem 0;
+            background: var(--dark);
+            margin-top: 3rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--text);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--primary-lighter);
+        }
+        
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        
+        @media (max-width: 992px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .main-project {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .main-project-image {
+                order: -1;
+            }
+            
+            .other-projects {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
-  
-  <header class="header">
-    <div class="logo">Bloom</div>
-    <nav class="nav">
-      <a href="#">Home</a>
-      <a href="#">About</a>
-      <a href="#">Services</a>
-      <a href="#">Contact</a>
-    </nav>
-  </header>
-  
-  <section class="hero">
+    <!-- Background blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    
     <div class="container">
-      <div class="bloom" style="top: 20%; left: 10%;"></div>
-      <div class="bloom" style="bottom: 10%; right: 20%;"></div>
-      
-      <h1>Modern Design<br>With Bloom Effects</h1>
-      <p>A sleek, modern website template featuring glass morphism, beautiful bloom lighting effects, and smooth animations. Perfect for creating an elegant and contemporary web presence.</p>
-      <a href="#" class="btn">Get Started</a>
-      
-      <div class="card">
-        <h2>Frosted Glass Components</h2>
-        <p>Our components use the latest CSS techniques to create beautiful frosted glass effects that add depth and sophistication to your website.</p>
-      </div>
+        <header>
+            <div class="logo">
+                <img src="https://cdn.discordapp.com/attachments/1353668606055153684/1353668639626231838/cc1d11e6-324f-4c86-a679-b777c97b425a_large-modified.png?ex=67e27da9&is=67e12c29&hm=2c8da9f399bc510df1a804637638121da3ddf37b7fcd0700de4a39dec62c5e36&" alt="logo" />
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section class="hero">
+            <div class="hero-content">
+                <h1>WetRat.xyz (elhouso)</h1>
+                <p>a guy that does stuff :)</p>
+                <a href="#about" class="btn">about me?</a>
+            </div>
+            <div class="hero-image glass-card">
+                <img src="https://cdn.discordapp.com/attachments/1353668606055153684/1353668639626231838/cc1d11e6-324f-4c86-a679-b777c97b425a_large-modified.png?ex=67e27da9&is=67e12c29&hm=2c8da9f399bc510df1a804637638121da3ddf37b7fcd0700de4a39dec62c5e36&" alt="big image" />
+            </div>
+        </section>
+        
+        <section id="about" class="about">
+            <h2 class="section-title">About Me</h2>
+            
+            <div class="glass-card" style="margin-bottom: 4rem;">
+                <h3 style="margin-bottom: 1.5rem; font-size: 1.75rem;">a guy who likes cheese</h3>
+                <p style="margin-bottom: 1.5rem; line-height: 1.7;">
+                    in a nutshell, i like to eat cheese.
+                </p>
+                <p style="line-height: 1.7;">
+                    When I'm not coding, you can find me exploring new design trends, experimenting with emerging technologies, or contributing to open-source projects. I believe in continuous learning and pushing the boundaries of what's possible on the web.
+                </p>
+            </div>
+        </section>
+        
+        <section id="projects" class="projects">
+            <h2 class="section-title">Projects</h2>
+            
+            <div class="main-project">
+                <div class="main-project-image">
+                    <img src="/api/placeholder/800/500" alt="Main Project" />
+                </div>
+                <div class="main-project-content glass-card">
+                    <h3>Immersive Portfolio Platform</h3>
+                    <p>A cutting-edge portfolio platform that uses 3D animations and interactive elements to showcase creative work in a unique and engaging way.</p>
+                    <div class="tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Three.js</span>
+                        <span class="tag">WebGL</span>
+                        <span class="tag">GSAP</span>
+                    </div>
+                    <a href="#" class="btn" style="margin-top: 1.5rem;">View Project</a>
+                </div>
+            </div>
+            
+            <div class="other-projects">
+                <div class="project-card glass-card">
+                    <div class="project-card-image">
+                        <img src="/api/placeholder/400/250" alt="Project 1" />
+                    </div>
+                    <div class="project-card-content">
+                        <h3>Crypto Dashboard</h3>
+                        <p>Real-time cryptocurrency tracking app with customizable watchlists and alerts.</p>
+                        <div class="tags">
+                            <span class="tag">Vue.js</span>
+                            <span class="tag">Chart.js</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card glass-card">
+                    <div class="project-card-image">
+                        <img src="/api/placeholder/400/250" alt="Project 2" />
+                    </div>
+                    <div class="project-card-content">
+                        <h3>AI Image Generator</h3>
+                        <p>Text-to-image generation app using machine learning algorithms.</p>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">TensorFlow</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card glass-card">
+                    <div class="project-card-image">
+                        <img src="/api/placeholder/400/250" alt="Project 3" />
+                    </div>
+                    <div class="project-card-content">
+                        <h3>Music Streaming App</h3>
+                        <p>Minimalist music player with custom visualizations and playlist features.</p>
+                        <div class="tags">
+                            <span class="tag">React Native</span>
+                            <span class="tag">Node.js</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="skills" class="skills">
+            <h2 class="section-title">Skills & Expertise</h2>
+            
+            <div class="skills-grid">
+                <div class="skill-card glass-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3>UI/UX Design</h3>
+                    <p>Creating intuitive, accessible, and visually stunning user interfaces that prioritize user experience.</p>
+                </div>
+                
+                <div class="skill-card glass-card">
+                    <div class="skill-icon">💻</div>
+                    <h3>Frontend Development</h3>
+                    <p>Building responsive and performant websites with modern JavaScript frameworks and CSS techniques.</p>
+                </div>
+                
+                <div class="skill-card glass-card">
+                    <div class="skill-icon">⚙️</div>
+                    <h3>Backend Development</h3>
+                    <p>Developing robust APIs and server-side applications with scalability and security in mind.</p>
+                </div>
+                
+                <div class="skill-card glass-card">
+                    <div class="skill-icon">📱</div>
+                    <h3>Mobile Development</h3>
+                    <p>Creating cross-platform mobile applications that provide native-like experiences.</p>
+                </div>
+                
+                <div class="skill-card glass-card">
+                    <div class="skill-icon">🧠</div>
+                    <h3>AI Integration</h3>
+                    <p>Implementing machine learning models and AI-powered features in web and mobile applications.</p>
+                </div>
+                
+                <div class="skill-card glass-card">
+                    <div class="skill-icon">🔍</div>
+                    <h3>Performance Optimization</h3>
+                    <p>Analyzing and improving application performance for better user experience and search rankings.</p>
+                </div>
+            </div>
+        </section>
     </div>
-  </section>
-
-  <script>
-    // Add simple parallax effect to blobs
-    document.addEventListener('mousemove', e => {
-      const x = e.clientX / window.innerWidth;
-      const y = e.clientY / window.innerHeight;
-      
-      document.querySelectorAll('.blob').forEach(blob => {
-        const speed = 30;
-        const offsetX = (x - 0.5) * speed;
-        const offsetY = (y - 0.5) * speed;
-        blob.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-      });
-    });
-  </script>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    <img src="/api/placeholder/150/40" alt="Portfolio Logo" />
+                </div>
+                <div class="footer-links">
+                    <a href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#skills">Skills</a>
+                </div>
+            </div>
+            <p class="copyright">© 2025 All Rights Reserved</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
